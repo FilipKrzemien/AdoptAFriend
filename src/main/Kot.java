@@ -1,10 +1,13 @@
 package main;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kot extends Zwierzak {
 	
+	static ArrayList<List<String>> kotki = new ArrayList<List<String>>();
+
+
 	public void dodBaza() throws IOException {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Podaj imie: ");
@@ -32,6 +35,9 @@ public class Kot extends Zwierzak {
 		
 	}
 	
+	public static void wypiszBaza() throws IOException {
+		wypiszBaza(kotki);
+	}
 	public static void main(String[] args) {
 
 	}

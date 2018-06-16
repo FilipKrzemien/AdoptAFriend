@@ -1,11 +1,11 @@
 package main;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Pies extends Zwierzak {
 	
-	ArrayList<String> pieski = new ArrayList<String>();
+	static ArrayList<List<String>> pieski = new ArrayList<List<String>>();
 
 	public void dodBaza() throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -23,18 +23,30 @@ public class Pies extends Zwierzak {
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
+    	List<String> temp = new ArrayList<String>();
 
-		Writer output = new BufferedWriter(new FileWriter("Psy.txt", true));
-		output.append(getImie() + "\t" + getWiek() + "\t" + getKolor() + "\t" + getKolorOczu() + "\t"
-				+ getWielkosc() + "\t" + getDataZnalezienia() + "\t" + getOpis() + System.getProperty("line.separator"));
-		output.close();
+		temp.add(getImie());
+		temp.add(String.valueOf(getWiek()));
+		temp.add(getKolor());
+		temp.add(getKolorOczu());
+		temp.add(String.valueOf(getWielkosc()));
+		temp.add(getDataZnalezienia());
+		temp.add(getOpis());
+		pieski.add(temp);
 	}
 	
 	public void usBaza() {
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void wypiszBaza() throws IOException {
+		wypiszBaza(pieski);		
+	}
+	
+	public static void reloadBaza() throws IOException{
+		reloadBaza("Psy.txt",pieski);
+	}
+	public static void main(String[] args){
 
 	}
 }

@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.*;
 
 public abstract class Zwierzak {
 	private String imie;
@@ -43,30 +44,55 @@ public abstract class Zwierzak {
 	
 	public abstract void usBaza();
 	
-	public static void wypiszBaza(String nazwa) throws IOException {
-		 BufferedReader br = new BufferedReader(new FileReader(nazwa));
-		 
-		  String st;
-		  while ((st = br.readLine()) != null)
-		    System.out.println(st);
-		  br.close();
+	public static void wypiszBaza(ArrayList<List<String>> list) throws IOException {
+		System.out.println(list);
 	};
 	
-	public static void utworzPlik(String nazwa){
+	public static void utworzPlik(String nazwa, ArrayList<List<String>> list) throws FileNotFoundException{
         File plik = new File(nazwa);
+    	List<String> temp = new ArrayList<String>();
         if( plik.isFile() == true){
-            System.out.println("Wczytano baze");
+            System.out.println("Wczytano baze " + nazwa);
+            StringBuilder contentBuilder = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new FileReader(nazwa)))
+            {
+         
+                String sCurrentLine;
+                while ((sCurrentLine = br.readLine()) != null)
+                {
+                    contentBuilder.append(sCurrentLine).append("\n");
+                    temp = Arrays.asList(sCurrentLine.split("\t"));
+                    list.add(temp);
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            System.out.println();
         }
         else{
             try{
                 plik.createNewFile();
-                System.out.println("Utworzono nowa baze");
+                System.out.println("Utworzono nowa baze " + nazwa);
             }
             catch(IOException e){
-                System.out.println("Nie mo¿na utworzyæ bazy");
+                System.out.println("Nie mo¿na utworzyæ bazy " + nazwa);
             }
         }
     }
+	
+	public static void reloadBaza(String nazwa, ArrayList<List<String>> list) throws IOException {
+        FileWriter fw = new FileWriter(nazwa);
+        BufferedWriter bw = new BufferedWriter(fw);
+		for(int i =0;i<list.size();i++) {
+			for(int j=0; j<7;j++) {
+	            bw.write(list.get(i).get(j).toString() + "\t");
+			}
+			bw.write("\r\n");
+		}
+		bw.close();
+	}
 	
 	public static void main(String[] args) {
 

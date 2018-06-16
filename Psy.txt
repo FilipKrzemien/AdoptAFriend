@@ -1,1 +1,2 @@
-Azor	10	Czarny	Br¹zowe	2	12/05/2018	Œredniej wielkoœci piesek lubi¹cy siê bawiæ.
+Azor	10	Czarny	Niebieskie	1	12/10/2018	balbalbla	
+Gnomek	1	Niebieski	Zielone	1	5/05/2010	Ma³y gnomek.	

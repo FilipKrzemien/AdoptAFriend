@@ -5,8 +5,8 @@ import java.io.*;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Pies.utworzPlik("Psy.txt");
-		Kot.utworzPlik("Koty.txt");
+		Pies.utworzPlik("Psy.txt", Pies.pieski);
+		Kot.utworzPlik("Koty.txt", Kot.kotki);
 		System.out.println("Schronisko dla zwierzat\nw Krakowie");
 		int wybor;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +24,7 @@ public class Main {
 					wybor=Integer.parseInt(br.readLine());
 					if(wybor==1)
 					{
-						Pies.wypiszBaza("Psy.txt");
+						Pies.wypiszBaza();
 						i=0;
 					}
 					else if(wybor==2)
@@ -42,7 +42,7 @@ public class Main {
 					wybor=Integer.parseInt(br.readLine());
 					if(wybor==1)
 					{
-						Kot.wypiszBaza("Koty.txt");
+						Kot.wypiszBaza();
 						i=0;
 					}
 					else if(wybor==2)
@@ -56,6 +56,7 @@ public class Main {
 				}
 				else
 				{
+					Pies.reloadBaza();
 					i=2;
 				}
 			}
