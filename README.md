@@ -1,11 +1,15 @@
 Priorytet:
-1. Przegladanie dostepnych zwierzat. - zrobione, brakuje GUI
-2. Wyszukiwanie zwirzat po kategoriach.
-3. Usuwanie z bazy już adoptowanych. - zrobione, brakuje GUI
-4. Dodawanie nowych do bazy. - zrobione, brakuje GUI
+1. Przegladanie dostepnych zwierzat - zrobione, dodać przycisk cofnij. - AMADEUSZ
+2. Wyszukiwanie zwierzat po kategoriach - FILIP
+3. Usuwanie z bazy już adoptowanych - zrobione, dokończyć GUI, formularz adopcji, zapis do txt (pdf XD) - AMADEUSZ
+4. panel logowania admin - dodawanie zwierzaków (dodawanie jest gotowe, wystarczy dorobić GUI i przerobić kod) i ich reczne usuwanie w przypadku innych okoliczności niż adopcja.
+5. Maven
+6. Wzorce projektowe 3 lub 1 architektoniczny.
 
 ---------------------------
-5. panel logowania admin - uzytkownik (np dodawanie zwierzakow, akceptowanie zgloszen)*
-6. adopcja, usuwanie, dodawanie, rezerwacja (chwilowo niedostepny zwierzak),
+6. Rezerwacja (chwilowo niedostepny zwierzak - przycisk "ADOPTUJ" nieaktywny, txt/pdf z info o rezerwacji)
+
+
+WUT XD NIKT TEGO NIE ZROBI XDD ZBYT TRUDNE, ZA MAŁO CZASU \|/
 7. wolontariat, formularz do admina, na poczte wysyla sie tymczasowy login i haslo* 
 8. wolontariusz ma harmonogram, wybiera dostepne dni pracy, co miesiac nowy*
