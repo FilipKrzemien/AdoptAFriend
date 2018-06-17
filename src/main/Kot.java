@@ -65,8 +65,8 @@ public class Kot extends Zwierzak {
 		kotki.add(new Kot(getImie(),getWiek(),getKolor(),getKolorOczu(),getDataZnalezienia(),getOpis()));
 	}
 	
-	public void usBaza() {
-		
+	public void adoptuj() throws IOException {
+		adoptuj(kotki, "kota");
 	}
 	
 	public static void wypiszBaza() throws IOException {

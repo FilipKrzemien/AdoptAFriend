@@ -73,8 +73,8 @@ public class Pies extends Zwierzak {
 		pieski.add(new Pies(getImie(),getWiek(),getKolor(),getKolorOczu(),getWielkosc(),getDataZnalezienia(),getOpis()));
 	}
 	
-	public void usBaza() {
-		
+	public void adoptuj() throws IOException {
+		adoptuj(pieski, "psa");
 	}
 	
 	public static void wypiszBaza() throws IOException {

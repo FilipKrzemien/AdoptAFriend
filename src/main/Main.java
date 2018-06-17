@@ -20,8 +20,9 @@ public class Main {
 				wybor=Integer.parseInt(br.readLine());
 				if(wybor==1)
 				{
-					System.out.println("Co chcesz zrobic?\n1. Przegladaj baze.\n2. Dodaj psa do bazy.\n3. Wroc\n");
+					System.out.println("Co chcesz zrobic?\n1. Przegladaj baze.\n2. Dodaj psa do bazy.\n3. Adoptuj\n4. Wroc\n");
 					wybor=Integer.parseInt(br.readLine());
+					Pies pies = new Pies();
 					if(wybor==1)
 					{
 						Pies.wypiszBaza();
@@ -29,8 +30,13 @@ public class Main {
 					}
 					else if(wybor==2)
 					{
-						Pies pies = new Pies();
+						
 						pies.dodBaza();
+						i=0;
+					}
+					else if(wybor==3)
+					{
+						pies.adoptuj();
 						i=0;
 					}
 					else
@@ -40,6 +46,7 @@ public class Main {
 				{
 					System.out.println("Co chcesz zrobic?\n1. Przegladaj baze.\n2. Dodaj kota do bazy.\n3. Wroc\n");
 					wybor=Integer.parseInt(br.readLine());
+					Kot kot = new Kot();
 					if(wybor==1)
 					{
 						Kot.wypiszBaza();
@@ -47,8 +54,13 @@ public class Main {
 					}
 					else if(wybor==2)
 					{
-						Kot kot = new Kot();
+						
 						kot.dodBaza();
+						i=0;
+					}
+					else if(wybor==3)
+					{
+						kot.adoptuj();
 						i=0;
 					}
 					else

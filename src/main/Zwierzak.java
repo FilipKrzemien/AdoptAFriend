@@ -49,7 +49,14 @@ public abstract class Zwierzak {
 	
 	public abstract void dodBaza() throws IOException;
 	
-	public abstract void usBaza();
+	public static void adoptuj(ArrayList<Zwierzak> list, String name) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Ktorego " + name + " chcesz adoptowaæ: ");
+		int i = Integer.parseInt(in.readLine());
+		list.remove(i-1);
+		Pies.reloadBaza();
+		Kot.reloadBaza();
+	}
 	
 	public static void wypiszBaza(ArrayList<Zwierzak> list, String name) throws IOException {
 		System.out.print("Imie\t\tWiek\t\tKolor\t\tKolor Oczu");
