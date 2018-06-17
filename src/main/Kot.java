@@ -9,8 +9,8 @@ public class Kot extends Zwierzak {
 	
 	public Kot() {}
 	
-	public Kot(String imie, int wiek, String kolor, String kolor_oczu, String data_znalezienia, String opis) {
-		super(imie,wiek,kolor,kolor_oczu,data_znalezienia,opis);
+	public Kot(String imie, int wiek, String kolor, String kolor_oczu, String rasa, String siersc, String data_znalezienia, String opis) {
+		super(imie,wiek,kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
 	}
 
 	public static void utworzPlik() throws FileNotFoundException{
@@ -27,8 +27,8 @@ public class Kot extends Zwierzak {
                 while ((sCurrentLine = br.readLine()) != null)
                 {
                     contentBuilder.append(sCurrentLine).append("\n");
-                    temp = Arrays.asList(sCurrentLine.split(","));
-                    kotki.add(new Kot(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3), temp.get(4),temp.get(5)));
+                    temp = Arrays.asList(sCurrentLine.split("\t"));
+                    kotki.add(new Kot(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3), temp.get(4),temp.get(5),temp.get(6),temp.get(7)));
                 }
             }
             catch (IOException e)
@@ -58,15 +58,19 @@ public class Kot extends Zwierzak {
 		setKolor(in.readLine());
 		System.out.println("Podaj kolor oczu: ");
 		setKolorOczu(in.readLine());
+		System.out.println("Podaj jaka to rasa: ");
+		setRasa(in.readLine());
+		System.out.println("Podaj dlugosc siersci: ");
+		setSiersc(in.readLine());
 		System.out.println("Podaj date znalezienia: ");
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
-		kotki.add(new Kot(getImie(),getWiek(),getKolor(),getKolorOczu(),getDataZnalezienia(),getOpis()));
+		kotki.add(new Kot(getImie(),getWiek(),getKolor(),getKolorOczu(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
 	}
 	
-	public void adoptuj() throws IOException {
-		adoptuj(kotki, "kota");
+	public void adoptuj(int i) throws IOException {
+		adoptuj(kotki, "kota", i);
 	}
 	
 	public static void wypiszBaza() throws IOException {
