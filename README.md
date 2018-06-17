@@ -1,8 +1,8 @@
 Priorytet:
-1. Przegladanie dostepnych zwierzat.
+1. Przegladanie dostepnych zwierzat. - zrobione, brakuje GUI
 2. Wyszukiwanie zwirzat po kategoriach.
-3. Usuwanie z bazy już adoptowanych.
-4. Dodawanie nowych do bazy.
+3. Usuwanie z bazy już adoptowanych. - zrobione, brakuje GUI
+4. Dodawanie nowych do bazy. - zrobione, brakuje GUI
 
 ---------------------------
 5. panel logowania admin - uzytkownik (np dodawanie zwierzakow, akceptowanie zgloszen)*
