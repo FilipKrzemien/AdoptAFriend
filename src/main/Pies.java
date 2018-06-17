@@ -14,8 +14,8 @@ public class Pies extends Zwierzak {
 	
 	public Pies() {}
 	
-	public Pies(String imie, int wiek, String kolor, String kolor_oczu, int wielkosc, String data_znalezienia, String opis) {
-		super(imie,wiek,kolor,kolor_oczu,data_znalezienia,opis);
+	public Pies(String imie, int wiek, String kolor, String kolor_oczu, int wielkosc,String rasa, String siersc, String data_znalezienia, String opis) {
+		super(imie,wiek,kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
 		this.wielkosc=wielkosc;
 	}
 	
@@ -33,8 +33,8 @@ public class Pies extends Zwierzak {
                 while ((sCurrentLine = br.readLine()) != null)
                 {
                     contentBuilder.append(sCurrentLine).append("\n");
-                    temp = Arrays.asList(sCurrentLine.split(","));
-                    pieski.add(new Pies(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3),Integer.parseInt(temp.get(4)),temp.get(5),temp.get(6)));
+                    temp = Arrays.asList(sCurrentLine.split("\t"));
+                    pieski.add(new Pies(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3),Integer.parseInt(temp.get(4)),temp.get(5),temp.get(6),temp.get(7),temp.get(8)));
                 }
             }
             catch (IOException e)
@@ -66,15 +66,19 @@ public class Pies extends Zwierzak {
 		setKolorOczu(in.readLine());
 		System.out.println("Podaj wiekosc (1-maly, 2-sredni, 3-duzy): ");
 		setWielkosc(Integer.parseInt(in.readLine()));
+		System.out.println("Podaj jaka to rasa: ");
+		setRasa(in.readLine());
+		System.out.println("Podaj dlugosc siersci: ");
+		setSiersc(in.readLine());
 		System.out.println("Podaj date znalezienia: ");
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
-		pieski.add(new Pies(getImie(),getWiek(),getKolor(),getKolorOczu(),getWielkosc(),getDataZnalezienia(),getOpis()));
+		pieski.add(new Pies(getImie(),getWiek(),getKolor(),getKolorOczu(),getWielkosc(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
 	}
 	
-	public void adoptuj() throws IOException {
-		adoptuj(pieski, "psa");
+	public void adoptuj(int i) throws IOException {
+		adoptuj(pieski, "psa", i);
 	}
 	
 	public static void wypiszBaza() throws IOException {
