@@ -5,8 +5,55 @@ import java.util.*;
 
 public class Pies extends Zwierzak {
 	
-	static ArrayList<List<String>> pieski = new ArrayList<List<String>>();
-
+	static ArrayList<Zwierzak> pieski = new ArrayList<Zwierzak>();
+	private int wielkosc;
+	
+	public int getWielkosc() { return wielkosc; }
+	
+	public void setWielkosc(int wielkosc) { this.wielkosc=wielkosc; }
+	
+	public Pies() {}
+	
+	public Pies(String imie, int wiek, String kolor, String kolor_oczu, int wielkosc, String data_znalezienia, String opis) {
+		super(imie,wiek,kolor,kolor_oczu,data_znalezienia,opis);
+		this.wielkosc=wielkosc;
+	}
+	
+	public static void utworzPlik() throws FileNotFoundException{
+		String nazwa="Psy.txt";
+        File plik = new File(nazwa);
+    	List<String> temp = new ArrayList<String>();
+        if( plik.isFile() == true){
+            System.out.println("Wczytano baze " + nazwa);
+            StringBuilder contentBuilder = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new FileReader(nazwa)))
+            {
+         
+                String sCurrentLine;
+                while ((sCurrentLine = br.readLine()) != null)
+                {
+                    contentBuilder.append(sCurrentLine).append("\n");
+                    temp = Arrays.asList(sCurrentLine.split(","));
+                    pieski.add(new Pies(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3),Integer.parseInt(temp.get(4)),temp.get(5),temp.get(6)));
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            System.out.println();
+        }
+        else{
+            try{
+                plik.createNewFile();
+                System.out.println("Utworzono nowa baze " + nazwa);
+            }
+            catch(IOException e){
+                System.out.println("Nie mo¿na utworzyæ bazy " + nazwa);
+            }
+        }
+    }
+	
 	public void dodBaza() throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Podaj imie: ");
@@ -23,16 +70,7 @@ public class Pies extends Zwierzak {
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
-    	List<String> temp = new ArrayList<String>();
-
-		temp.add(getImie());
-		temp.add(String.valueOf(getWiek()));
-		temp.add(getKolor());
-		temp.add(getKolorOczu());
-		temp.add(String.valueOf(getWielkosc()));
-		temp.add(getDataZnalezienia());
-		temp.add(getOpis());
-		pieski.add(temp);
+		pieski.add(new Pies(getImie(),getWiek(),getKolor(),getKolorOczu(),getWielkosc(),getDataZnalezienia(),getOpis()));
 	}
 	
 	public void usBaza() {
@@ -40,12 +78,13 @@ public class Pies extends Zwierzak {
 	}
 	
 	public static void wypiszBaza() throws IOException {
-		wypiszBaza(pieski);		
+		wypiszBaza(pieski, "Pies");
 	}
 	
 	public static void reloadBaza() throws IOException{
-		reloadBaza("Psy.txt",pieski);
+		reloadBaza("Psy.txt",pieski, "Pies");
 	}
+
 	public static void main(String[] args){
 
 	}

@@ -1,2 +1,1 @@
-Azor	10	Czarny	Niebieskie	1	12/10/2018	balbalbla	
-Gnomek	1	Niebieski	Zielone	1	5/05/2010	Ma³y gnomek.	
+Azor,12,Czarny,Br¹zowe,1, 14/05/2017,balblabl
