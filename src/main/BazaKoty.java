@@ -6,9 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -23,6 +23,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Component;
 public class BazaKoty {
 
@@ -58,20 +60,47 @@ public class BazaKoty {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 582, 441);
 		JScrollPane scrollPane = new JScrollPane(panel_1);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		frame.getContentPane().add(scrollPane);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-
+		
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		
+		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
+		
+		JButton btnWstecz = new JButton("WSTECZ");
+		btnWstecz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				String[] args = null;
+				MainWindow.main(args);
+			}
+		});
+		panel_2.add(btnWstecz);
+		
+		JButton btnWyjd = new JButton(" WYJD\u0179 ");
+		btnWyjd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		panel_2.add(btnWyjd);
+		
+		JLabel lblNewLabel_9 = new JLabel("KOTY");
+		frame.getContentPane().add(lblNewLabel_9);
+		lblNewLabel_9.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
 		for(int i=0;i<Kot.kotki.size();i++)
 		{		
 		JPanel panel = new JPanel();
 		JLabel lblNewLabel = new JLabel("");
-		String s = "KOTY/" + (i+1) + "_" + Kot.kotki.get(i).getImie() + "_kot.jpg";
+		String s = "KOTY/" + (i+1) + Kot.kotki.get(i).getImie() + "_kot.jpg";
 		lblNewLabel.setIcon(new ImageIcon(s));
 		JLabel lblImi = new JLabel("Imi\u0119:");
 		lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -124,115 +153,119 @@ public class BazaKoty {
 				try {
 					Kot Kot = new Kot();
 					Kot.adoptuj(j);
-					frame.setVisible(false);
+					frame.dispose();
+					String[] args = null;
+					Adopcja.main(args, "Kot");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		
-		JLabel lblNewLabel_9 = new JLabel("KOTY");
-		lblNewLabel_9.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_9);
-		
-		JSeparator separator_1 = new JSeparator();
-		panel_1.add(separator_1);
+
 		JSeparator separator = new JSeparator();
 		
-
-		txtr.setEditable(false);
+		JLabel lblNewLabel_11 = new JLabel("");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblOpis)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblWiek)
+								.addComponent(lblKolor)
+								.addComponent(lblKolorOczu)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblOpis)
-										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblImi)
+										.addComponent(lblRasa)
+										.addComponent(lblDugoSierci)
+										.addComponent(lblDataZnalezienia))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblImi)
-										.addComponent(lblWiek)
-										.addComponent(lblKolor)
-										.addComponent(lblKolorOczu)
 										.addGroup(gl_panel.createSequentialGroup()
-											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblDataZnalezienia)
-												.addComponent(lblRasa)
-												.addComponent(lblDugoSierci))
-											.addGap(0)
-											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblNewLabel_8, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_6, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))))
-								.addComponent(txtr, GroupLayout.PREFERRED_SIZE, 433, GroupLayout.PREFERRED_SIZE))
-							.addGap(0)
+											.addGap(70)
+											.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(50)
+											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(lblNewLabel_8, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNewLabel_11, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(txtr, GroupLayout.PREFERRED_SIZE, 433, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnAdoptuj))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(49)
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 452, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+							.addGap(0)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(30, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(17)
+					.addGap(10)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnAdoptuj)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblImi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lblNewLabel_1))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblWiek)
-										.addComponent(lblNewLabel_2))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblKolor)
-										.addComponent(lblNewLabel_3))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblKolorOczu)
-										.addComponent(lblNewLabel_4))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblRasa)
-										.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-										.addComponent(lblDugoSierci))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(lblNewLabel_8, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lblDataZnalezienia, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addGap(17)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblImi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_11, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblWiek)
+								.addComponent(lblNewLabel_2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblKolor)
+								.addComponent(lblNewLabel_3))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblKolorOczu)
+								.addComponent(lblNewLabel_4))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblRasa)
+								.addComponent(lblNewLabel_6))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDugoSierci)
+								.addComponent(lblNewLabel_7))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_8)
+								.addComponent(lblDataZnalezienia))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblOpis)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtr, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGap(18)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(89))
+							.addComponent(txtr, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnAdoptuj))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addGap(10))
 		);
 		panel.setLayout(gl_panel);
-		panel_1.add(panel);			
+		panel_1.add(panel);
+		frame.getContentPane().add(scrollPane);
+		SwingUtilities.invokeLater(new Runnable() {
+		    @Override
+		    public void run() {
+		        scrollPane.getViewport().setViewPosition( new Point(0, 0) );
+		    }
+		});
 		}
 	}
 }

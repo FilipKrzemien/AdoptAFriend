@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -61,32 +60,31 @@ public class MainWindow {
 		frame.getContentPane().add(lblSchroniskoDlaZwierzt);
 		lblSchroniskoDlaZwierzt.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSchroniskoDlaZwierzt.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JButton btnWyjd = new JButton(" WYJD\u0179 ");
+		btnWyjd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		btnWyjd.setBounds(250, 345, 89, 23);
+		frame.getContentPane().add(btnWyjd);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Pies.wypiszBaza();
-					frame.setVisible(false);
+				//Pies.wypiszBaza();
+				frame.dispose();
 
-					String[] args = null;
-					BazaPsy.main(args);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				String[] args = null;
+				BazaPsy.main(args);
 			}
 		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Kot.wypiszBaza();
-					frame.setVisible(false);
+				//Kot.wypiszBaza();
+				frame.dispose();
 
-					String[] args = null;
-					BazaKoty.main(args);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				String[] args = null;
+				BazaKoty.main(args);
 			}
 		});
 		

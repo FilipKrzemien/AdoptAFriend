@@ -6,6 +6,7 @@ import java.util.*;
 public abstract class Zwierzak {
 	private String imie;
 	private int wiek;
+	private String plec;
 	private String kolor;
 	private String kolor_oczu;
 	private String rasa;
@@ -15,9 +16,10 @@ public abstract class Zwierzak {
 	
 	public Zwierzak() {}
 	
-	public Zwierzak(String imie, int wiek, String kolor, String kolor_oczu, String rasa, String siersc, String data_znalezienia, String opis) {
+	public Zwierzak(String imie, int wiek, String plec, String kolor, String kolor_oczu, String rasa, String siersc, String data_znalezienia, String opis) {
 		this.imie=imie;
 		this.wiek=wiek;
+		this.plec=plec;
 		this.kolor=kolor;
 		this.kolor_oczu=kolor_oczu;
 		this.rasa=rasa;
@@ -33,6 +35,10 @@ public abstract class Zwierzak {
 	public int getWiek() { return wiek; }
 	
 	public void setWiek(int wiek) { this.wiek=wiek; }
+	
+	public String getPlec() { return plec; }
+	
+	public void setPlec(String plec) { this.plec=plec; }
 	
 	public String getKolor() { return kolor; }
 	
@@ -94,6 +100,7 @@ public abstract class Zwierzak {
 		for(int i =0;i<list.size();i++) {
 	        bw.write(list.get(i).getImie() + "\t");
 	        bw.write(list.get(i).getWiek() + "\t");
+	        bw.write(list.get(i).getPlec() + "\t");
 	        bw.write(list.get(i).getKolor() + "\t");
 	        bw.write(list.get(i).getKolorOczu() + "\t");
 			if(name.equals(Pies.class.getSimpleName())) { bw.write(((Pies) list.get(i)).getWielkosc() + "\t"); }	        
