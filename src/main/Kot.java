@@ -9,8 +9,8 @@ public class Kot extends Zwierzak {
 	
 	public Kot() {}
 	
-	public Kot(String imie, int wiek, String kolor, String kolor_oczu, String rasa, String siersc, String data_znalezienia, String opis) {
-		super(imie,wiek,kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
+	public Kot(String imie, int wiek, String plec, String kolor, String kolor_oczu, String rasa, String siersc, String data_znalezienia, String opis) {
+		super(imie,wiek,plec, kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
 	}
 
 	public static void utworzPlik() throws FileNotFoundException{
@@ -28,7 +28,7 @@ public class Kot extends Zwierzak {
                 {
                     contentBuilder.append(sCurrentLine).append("\n");
                     temp = Arrays.asList(sCurrentLine.split("\t"));
-                    kotki.add(new Kot(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3), temp.get(4),temp.get(5),temp.get(6),temp.get(7)));
+                    kotki.add(new Kot(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3), temp.get(4),temp.get(5),temp.get(6),temp.get(7),temp.get(8)));
                 }
             }
             catch (IOException e)
@@ -54,6 +54,8 @@ public class Kot extends Zwierzak {
 		setImie(in.readLine());
 		System.out.println("Podaj wiek: ");
 		setWiek(Integer.parseInt(in.readLine()));
+		System.out.println("Podaj plec(samiec/samica): ");
+		setPlec(in.readLine());
 		System.out.println("Podaj kolor: ");
 		setKolor(in.readLine());
 		System.out.println("Podaj kolor oczu: ");
@@ -66,7 +68,7 @@ public class Kot extends Zwierzak {
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
-		kotki.add(new Kot(getImie(),getWiek(),getKolor(),getKolorOczu(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
+		kotki.add(new Kot(getImie(),getWiek(),getPlec(), getKolor(),getKolorOczu(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
 	}
 	
 	public void adoptuj(int i) throws IOException {

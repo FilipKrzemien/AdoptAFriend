@@ -14,8 +14,8 @@ public class Pies extends Zwierzak {
 	
 	public Pies() {}
 	
-	public Pies(String imie, int wiek, String kolor, String kolor_oczu, int wielkosc,String rasa, String siersc, String data_znalezienia, String opis) {
-		super(imie,wiek,kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
+	public Pies(String imie, int wiek, String plec, String kolor, String kolor_oczu, int wielkosc,String rasa, String siersc, String data_znalezienia, String opis) {
+		super(imie,wiek,plec,kolor,kolor_oczu,rasa, siersc, data_znalezienia,opis);
 		this.wielkosc=wielkosc;
 	}
 	
@@ -34,7 +34,7 @@ public class Pies extends Zwierzak {
                 {
                     contentBuilder.append(sCurrentLine).append("\n");
                     temp = Arrays.asList(sCurrentLine.split("\t"));
-                    pieski.add(new Pies(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3),Integer.parseInt(temp.get(4)),temp.get(5),temp.get(6),temp.get(7),temp.get(8)));
+                    pieski.add(new Pies(temp.get(0),Integer.parseInt(temp.get(1)),temp.get(2),temp.get(3),temp.get(4),Integer.parseInt(temp.get(5)),temp.get(6),temp.get(7),temp.get(8),temp.get(9)));
                 }
             }
             catch (IOException e)
@@ -60,6 +60,8 @@ public class Pies extends Zwierzak {
 		setImie(in.readLine());
 		System.out.println("Podaj wiek: ");
 		setWiek(Integer.parseInt(in.readLine()));
+		System.out.println("Podaj plec(samiec/samica): ");
+		setPlec(in.readLine());
 		System.out.println("Podaj kolor: ");
 		setKolor(in.readLine());
 		System.out.println("Podaj kolor oczu: ");
@@ -74,7 +76,7 @@ public class Pies extends Zwierzak {
 		setDataZnalezienia(in.readLine());
 		System.out.println("Podaj opis: ");
 		setOpis(in.readLine());
-		pieski.add(new Pies(getImie(),getWiek(),getKolor(),getKolorOczu(),getWielkosc(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
+		pieski.add(new Pies(getImie(),getWiek(),getPlec(), getKolor(),getKolorOczu(),getWielkosc(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
 	}
 	
 	public void adoptuj(int i) throws IOException {
