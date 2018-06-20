@@ -67,6 +67,18 @@ public abstract class Zwierzak {
 	public abstract void dodBaza() throws IOException;
 	
 	public static void adoptuj(ArrayList<Zwierzak> list, String name, int i) throws IOException {
+		String s;
+		if(name.equals(Pies.class.getSimpleName()))
+		{
+			s = "PSY/" + Pies.pieski.get(i-1).getImie() + "_pies.jpg";
+			System.out.println(Pies.pieski.get(i-1).getImie());
+		}
+		else
+		{
+			s = "KOTY/" + Pies.pieski.get(i-1).getImie() + "_kot.jpg";			
+		}
+		File file = new File(s);
+		file.delete();
 		list.remove(i-1);
 		Pies.reloadBaza();
 		Kot.reloadBaza();

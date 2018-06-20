@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Pies extends Zwierzak {
 	
-	static ArrayList<Zwierzak> pieski = new ArrayList<Zwierzak>();
+	public static ArrayList<Zwierzak> pieski = new ArrayList<Zwierzak>();
 	private int wielkosc;
 	
 	public int getWielkosc() { return wielkosc; }
@@ -80,7 +80,7 @@ public class Pies extends Zwierzak {
 	}
 	
 	public void adoptuj(int i) throws IOException {
-		adoptuj(pieski, "psa", i);
+		adoptuj(pieski, "Pies", i);
 	}
 	
 	public static void wypiszBaza() throws IOException {

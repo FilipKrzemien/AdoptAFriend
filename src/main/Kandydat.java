@@ -32,6 +32,8 @@ public class Kandydat {
 	
 	public void setMail(String mail) { this.mail=mail; }
 	
+	//zapis do pliku + dane zwierzaka tez
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
