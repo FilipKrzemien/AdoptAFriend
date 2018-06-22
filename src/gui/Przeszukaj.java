@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,8 +29,14 @@ import javax.swing.JComboBox;
 
 public class Przeszukaj {
 
-	private JFrame frame;
-
+	private 
+		JFrame frame;
+		String[] filtry = new String[4];
+	public
+		String[] kolory;
+		String[] koloryOczu;
+		String[] siersci;
+		String[] rasy;
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +79,6 @@ public class Przeszukaj {
 		lblKolor.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		
-		
 		JLabel lblKolorOczu = new JLabel("Kolor oczu:");
 		lblKolorOczu.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -81,19 +87,9 @@ public class Przeszukaj {
 		
 		JLabel lblSier = new JLabel("Sier\u015B\u0107:");
 		lblSier.setFont(new Font("Tahoma", Font.BOLD, 12));
-		System.out.println(cechy.length);
 		
-		String[] kolory;
-		String[] koloryOczu;
-		String[] siersci;
-		String[] rasy;
+		fillArrays(cechy);	
 		
-		kolory=Wyszukiwanie.usun_duplikaty(cechy,0);
-		koloryOczu=Wyszukiwanie.usun_duplikaty(cechy,1);
-		siersci=Wyszukiwanie.usun_duplikaty(cechy,2);
-		rasy=Wyszukiwanie.usun_duplikaty(cechy,3);	
-		
-	    System.out.println(kolory);
 		JComboBox<Object> kolor = new JComboBox<Object>();
 		kolor.setModel(new DefaultComboBoxModel<Object>(kolory));
 		
@@ -107,6 +103,14 @@ public class Przeszukaj {
 		rasa.setModel(new DefaultComboBoxModel<Object>(rasy));
 		
 		JButton btnFiltruj = new JButton("Filtruj");
+		btnFiltruj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				preFilter(cechy, kolor, kolorOczu, siersc, rasa);
+				Integer[] counter = properFilter(cechy);
+				Arrays.sort(counter,Collections.reverseOrder());
+				//for(int i=0;i<counter.length;i++) {System.out.println(counter[i]);}
+			}
+		});
 		
 		JButton btnWstecz = new JButton("Wstecz");
 		btnWstecz.addActionListener(new ActionListener() 
@@ -198,4 +202,38 @@ public class Przeszukaj {
 		panel.setLayout(gl_panel);
 		
 	}
+
+	private void fillArrays(String[][] cechy) {
+		kolory=Wyszukiwanie.usun_duplikaty(cechy,0);
+		koloryOczu=Wyszukiwanie.usun_duplikaty(cechy,1);
+		siersci=Wyszukiwanie.usun_duplikaty(cechy,2);
+		rasy=Wyszukiwanie.usun_duplikaty(cechy,3);
+	}
+	private Integer[] properFilter(String[][] cechy) {
+		Integer[] counter = new Integer[cechy.length];
+		for(int i=0;i<cechy.length;i++) 
+		{	
+			counter[i]=0;
+			for(int j=0;j<4;j++) 
+			{	
+				if(cechy[i][j].equals(filtry[j])) 
+				{
+					counter[i]+=1;
+				}
+			}
+			
+		}
+		return counter;
+	}
+
+	private void preFilter(String[][] cechy, JComboBox<Object> kolor, JComboBox<Object> kolorOczu,
+			JComboBox<Object> siersc, JComboBox<Object> rasa) {
+		filtry[0]=(String)kolor.getSelectedItem();
+		filtry[1]=(String)kolorOczu.getSelectedItem();
+		filtry[2]=(String)siersc.getSelectedItem();
+		filtry[3]=(String)rasa.getSelectedItem();
+		
+		
+	}
+	
 }

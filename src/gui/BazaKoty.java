@@ -35,6 +35,7 @@ import java.awt.Component;
 public class BazaKoty {
 
 	private JFrame frame;
+	private String[][] cechy = new String[Kot.kotki.size()][4];
 	/**
 	 * Launch the application.
 	 */
@@ -62,8 +63,7 @@ public class BazaKoty {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[][] cechy;
-		cechy = new String[Kot.kotki.size()][4];
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +103,7 @@ public class BazaKoty {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				String[] args = null;
-				Przeszukaj.main(args, "Kot",cechy);
+				Przeszukaj.main(args, "Kot",getCechy());
 			}
 		});
 		panel_2.add(btnSzukaj);
@@ -161,10 +161,7 @@ public class BazaKoty {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_8 = new JLabel(Kot.kotki.get(i).getDataZnalezienia());
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		cechy[i][0]=Kot.kotki.get(i).getKolor();
-		cechy[i][1]=Kot.kotki.get(i).getKolorOczu();
-		cechy[i][2]=Kot.kotki.get(i).getRasa();
-		cechy[i][3]=Kot.kotki.get(i).getSiersc();
+		setCechy(cechy, i);
 		JTextArea txtr = new JTextArea();
 		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtr.setText(Kot.kotki.get(i).getOpis());
@@ -310,4 +307,15 @@ public class BazaKoty {
 		});
 		}
 	}
+
+	private void setCechy(String[][] cechy, int i) {
+		cechy[i][0]=Kot.kotki.get(i).getKolor();
+		cechy[i][1]=Kot.kotki.get(i).getKolorOczu();
+		cechy[i][2]=Kot.kotki.get(i).getRasa();
+		cechy[i][3]=Kot.kotki.get(i).getSiersc();
+	}
+	public String[][] getCechy(){
+		return cechy;
+	}
 }
+	
