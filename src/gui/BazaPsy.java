@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import main.Kot;
 import main.Pies;
 
 import javax.imageio.ImageIO;
@@ -65,7 +66,9 @@ public class BazaPsy {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+		
+		String[][] cechy;
+		cechy = new String[Pies.pieski.size()][4];
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +109,7 @@ public class BazaPsy {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				String[] args = null;
-				Przeszukaj.main(args, "Pies");
+				Przeszukaj.main(args, "Pies",cechy);
 			}
 		});
 		panel_2.add(btnSzukaj);
@@ -174,6 +177,10 @@ public class BazaPsy {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_8 = new JLabel(Pies.pieski.get(i).getDataZnalezienia());
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		cechy[i][0]=Pies.pieski.get(i).getKolor();
+		cechy[i][1]=Pies.pieski.get(i).getKolorOczu();
+		cechy[i][2]=Pies.pieski.get(i).getRasa();
+		cechy[i][3]=Pies.pieski.get(i).getSiersc();
 		JTextArea txtr = new JTextArea();
 		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtr.setText(Pies.pieski.get(i).getOpis());

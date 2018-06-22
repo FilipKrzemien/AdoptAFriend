@@ -10,6 +10,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import main.Wyszukiwanie;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
@@ -24,11 +33,11 @@ public class Przeszukaj {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, String name) {
+	public static void main(String[] args, String name, String[][] cechy) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Przeszukaj window = new Przeszukaj(name);
+					Przeszukaj window = new Przeszukaj(name, cechy);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,14 +49,14 @@ public class Przeszukaj {
 	/**
 	 * Create the application.
 	 */
-	public Przeszukaj(String name) {
-		initialize(name);
+	public Przeszukaj(String name, String[][] cechy) {
+		initialize(name, cechy);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String name) {
+	private void initialize(String name, String[][] cechy) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,15 +81,30 @@ public class Przeszukaj {
 		
 		JLabel lblSier = new JLabel("Sier\u015B\u0107:");
 		lblSier.setFont(new Font("Tahoma", Font.BOLD, 12));
+		System.out.println(cechy.length);
 		
-		JComboBox comboBox = new JComboBox();
+		String[] kolory;
+		String[] koloryOczu;
+		String[] siersci;
+		String[] rasy;
+		
+		kolory=Wyszukiwanie.usun_duplikaty(cechy,0);
+		koloryOczu=Wyszukiwanie.usun_duplikaty(cechy,1);
+		siersci=Wyszukiwanie.usun_duplikaty(cechy,2);
+		rasy=Wyszukiwanie.usun_duplikaty(cechy,3);	
+		
+	    System.out.println(kolory);
+		JComboBox<Object> kolor = new JComboBox<Object>();
+		kolor.setModel(new DefaultComboBoxModel<Object>(kolory));
 		
 		JComboBox<Object> kolorOczu = new JComboBox<Object>();
-		kolorOczu.setModel(new DefaultComboBoxModel<Object>(new String[] {"niebieski", "zielony"}));
+		kolorOczu.setModel(new DefaultComboBoxModel<Object>(koloryOczu));
 		
-		JComboBox comboBox_2 = new JComboBox();
+		JComboBox<Object> siersc = new JComboBox<Object>();
+		siersc.setModel(new DefaultComboBoxModel<Object>(siersci));
 		
-		JComboBox comboBox_3 = new JComboBox();
+		JComboBox<Object> rasa = new JComboBox<Object>();
+		rasa.setModel(new DefaultComboBoxModel<Object>(rasy));
 		
 		JButton btnFiltruj = new JButton("Filtruj");
 		
@@ -125,10 +149,10 @@ public class Przeszukaj {
 										.addComponent(lblSier))
 									.addGap(26)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(rasa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(kolorOczu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(kolor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(siersc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addGap(82)
 									.addComponent(label, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel.createSequentialGroup()
@@ -149,7 +173,7 @@ public class Przeszukaj {
 							.addGap(35)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblKolor)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(kolor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblKolorOczu)
@@ -157,11 +181,11 @@ public class Przeszukaj {
 							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNewLabel)
-								.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(siersc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblSier)
-								.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(rasa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addComponent(btnFiltruj)
 							.addGap(26)

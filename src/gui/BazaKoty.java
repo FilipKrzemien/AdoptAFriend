@@ -62,7 +62,8 @@ public class BazaKoty {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+		String[][] cechy;
+		cechy = new String[Kot.kotki.size()][4];
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,7 +103,7 @@ public class BazaKoty {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				String[] args = null;
-				Przeszukaj.main(args, "Kot");
+				Przeszukaj.main(args, "Kot",cechy);
 			}
 		});
 		panel_2.add(btnSzukaj);
@@ -114,9 +115,12 @@ public class BazaKoty {
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
 		for(int i=0;i<Kot.kotki.size();i++)
 		{		
+		
+		
 		JPanel panel = new JPanel();
 		JLabel lblNewLabel = new JLabel("");
 		String s = "KOTY/" + Kot.kotki.get(i).getImie() + "_kot.jpg";
+		
 		lblNewLabel.setIcon(new ImageIcon(s));
 		JLabel lblImi = new JLabel("Imi\u0119:");
 		lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -147,6 +151,7 @@ public class BazaKoty {
 		JLabel lblNewLabel_2 = new JLabel(Integer.toString(Kot.kotki.get(i).getWiek()));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_3 = new JLabel(Kot.kotki.get(i).getKolor());
+	
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_4 = new JLabel(Kot.kotki.get(i).getKolorOczu());
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -156,6 +161,10 @@ public class BazaKoty {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_8 = new JLabel(Kot.kotki.get(i).getDataZnalezienia());
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		cechy[i][0]=Kot.kotki.get(i).getKolor();
+		cechy[i][1]=Kot.kotki.get(i).getKolorOczu();
+		cechy[i][2]=Kot.kotki.get(i).getRasa();
+		cechy[i][3]=Kot.kotki.get(i).getSiersc();
 		JTextArea txtr = new JTextArea();
 		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtr.setText(Kot.kotki.get(i).getOpis());
