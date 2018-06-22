@@ -93,7 +93,16 @@ public class BazaPsy {
 		});
 		panel_2.add(btnWstecz);
 		
+		JButton btnSzukaj = new JButton("SZUKAJ");
+		btnSzukaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+			}
+		});
+		panel_2.add(btnSzukaj);
+		
 		JButton btnWyjd = new JButton(" WYJD\u0179 ");
+		btnWyjd.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnWyjd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
