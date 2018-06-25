@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class FormularzAdopt extends Kandydat{
+public class FormularzAdopt {
 
 	private JFrame frame;
 	private JTextField nazwisko;
@@ -120,21 +120,18 @@ public class FormularzAdopt extends Kandydat{
 		btnWylij.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] args = null;
-				setImie(imie.getText());
-				setNazwisko(nazwisko.getText());
-				setData(dzien.getSelectedItem().toString()+miesiac.getSelectedItem().toString()+rok.getSelectedItem().toString());
-				setAdres(adres.getText());
-				setTel(telefon.getText());
-				setMail(email.getText());
+				Kandydat kandydat = new Kandydat(imie.getText(),nazwisko.getText(),
+						dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString(),
+						adres.getText(),telefon.getText(),email.getText());
 				if(name.equals(Pies.class.getSimpleName()))
 				{
 					frame.dispose();
-					Adopcja.main(args, "Pies", j);
+					Adopcja.main(args, "Pies", j, kandydat);
 				}
 				else
 				{
 					frame.dispose();
-					Adopcja.main(args, "Kot", j);
+					Adopcja.main(args, "Kot", j, kandydat);
 				}
 			}
 		});

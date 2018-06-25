@@ -7,8 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import main.User;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class MainWindow {
 
@@ -67,8 +71,54 @@ public class MainWindow {
 				System.exit(0);
 			}
 		});
-		btnWyjd.setBounds(250, 345, 89, 23);
+		btnWyjd.setBounds(246, 345, 89, 23);
 		frame.getContentPane().add(btnWyjd);
+		
+		JPanel loguj = new JPanel();
+		loguj.setBounds(250, 11, 324, 51);
+		frame.getContentPane().add(loguj);
+		loguj.setLayout(null);
+		
+		JButton btnZaloguj = new JButton("ZALOGUJ");
+		btnZaloguj.setBounds(225, 0, 89, 23);
+		loguj.add(btnZaloguj);
+		
+		JPanel wyloguj = new JPanel();
+		wyloguj.setLayout(null);
+		wyloguj.setBounds(250, 11, 324, 51);
+		frame.getContentPane().add(wyloguj);
+		
+		JButton btnWyloguj = new JButton("WYLOGUJ");
+		btnWyloguj.setBounds(214, 0, 100, 23);
+		wyloguj.add(btnWyloguj);
+		btnWyloguj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				loguj.setVisible(true);
+				wyloguj.setVisible(false);
+				User.setZaloguj(0);
+			}
+		});
+		
+		JLabel lblnick = new JLabel(User.user.get(Logowanie.number).getNick());
+		lblnick.setForeground(Color.GRAY);
+		lblnick.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblnick.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblnick.setBounds(142, 0, 60, 23);
+		wyloguj.add(lblnick);
+		
+		JLabel lblZalJako = new JLabel("Zalogowany jako:");
+		lblZalJako.setForeground(Color.GRAY);
+		lblZalJako.setFont(new Font("Tahoma", Font.ITALIC, 12));
+		lblZalJako.setBounds(35, 0, 97, 23);
+		wyloguj.add(lblZalJako);
+		btnZaloguj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				String[] args = null;
+				Logowanie.main(args);
+				SwingUtilities.updateComponentTreeUI(frame);
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Pies.wypiszBaza();
@@ -88,6 +138,15 @@ public class MainWindow {
 			}
 		});
 		
-
+		if(User.getZaloguj()==0)
+		{
+			loguj.setVisible(true);
+			wyloguj.setVisible(false);
+		}
+		else
+		{
+			loguj.setVisible(false);
+			wyloguj.setVisible(true);			
+		}
 	}
 }

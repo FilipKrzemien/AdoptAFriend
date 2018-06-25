@@ -23,6 +23,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import main.Kot;
+import main.User;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -35,6 +36,8 @@ import java.awt.Component;
 public class BazaKoty {
 
 	private JFrame frame;
+	private static String[][] cechy = new String[Kot.kotki.size()][4];
+	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +65,7 @@ public class BazaKoty {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,7 +91,36 @@ public class BazaKoty {
 			}
 		});
 		panel_2.add(btnWstecz);
-		
+	
+		JButton btnDodaj = new JButton("DODAJ");
+		if(User.getZaloguj()==1)
+		{
+			btnDodaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					System.out.println("Dodawanko");
+					//String[] args = null;
+					//MainWindow.main(args);
+				}
+			});
+			btnDodaj.setEnabled(true);	
+		}
+		else
+		{
+			btnDodaj.setEnabled(false);
+		}
+		panel_2.add(btnDodaj);
+
+		JButton btnSzukaj = new JButton("SZUKAJ");
+		btnSzukaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				String[] args = null;
+				Przeszukaj.main(args, "Kot",getCechy());
+			}
+		});
+		panel_2.add(btnSzukaj);	
+
 		JButton btnWyjd = new JButton(" WYJD\u0179 ");
 		btnWyjd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,9 +136,12 @@ public class BazaKoty {
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
 		for(int i=0;i<Kot.kotki.size();i++)
 		{		
+		
+		
 		JPanel panel = new JPanel();
 		JLabel lblNewLabel = new JLabel("");
 		String s = "KOTY/" + Kot.kotki.get(i).getImie() + "_kot.jpg";
+		
 		lblNewLabel.setIcon(new ImageIcon(s));
 		JLabel lblImi = new JLabel("Imi\u0119:");
 		lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -137,6 +172,7 @@ public class BazaKoty {
 		JLabel lblNewLabel_2 = new JLabel(Integer.toString(Kot.kotki.get(i).getWiek()));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_3 = new JLabel(Kot.kotki.get(i).getKolor());
+	
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_4 = new JLabel(Kot.kotki.get(i).getKolorOczu());
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -146,21 +182,45 @@ public class BazaKoty {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_8 = new JLabel(Kot.kotki.get(i).getDataZnalezienia());
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		setCechy(cechy, i);
 		JTextArea txtr = new JTextArea();
 		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtr.setText(Kot.kotki.get(i).getOpis());
 		txtr.setLineWrap(true);
 		txtr.setWrapStyleWord(true);
 		txtr.setOpaque(false);
-		JButton btnAdoptuj = new JButton("ADOPTUJ");
 		int j=i+1;
-		btnAdoptuj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				String[] args = null;
-				FormularzAdopt.main(args, j, "Kot");
-			}
-		});
+		if(User.getZaloguj()==1)
+		{
+			btnAdoptuj = new JButton("USUÑ");
+			btnAdoptuj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					Kot kot = new Kot();
+					try {
+						kot.adoptuj(j);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String[] args = null;
+					BazaKoty.main(args);
+				}
+			});
+		}
+		else
+		{
+			btnAdoptuj = new JButton("ADOPTUJ");
+			btnAdoptuj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					String[] args = null;
+					FormularzAdopt.main(args, j, "Kot");
+				}
+			});
+		}
+
+
 
 		JSeparator separator = new JSeparator();
 		
@@ -291,4 +351,15 @@ public class BazaKoty {
 		});
 		}
 	}
+
+	private void setCechy(String[][] cechy, int i) {
+		cechy[i][0]=Kot.kotki.get(i).getKolor();
+		cechy[i][1]=Kot.kotki.get(i).getKolorOczu();
+		cechy[i][2]=Kot.kotki.get(i).getRasa();
+		cechy[i][3]=Kot.kotki.get(i).getSiersc();
+	}
+	public static String[][] getCechy(){
+		return cechy;
+	}
 }
+	
