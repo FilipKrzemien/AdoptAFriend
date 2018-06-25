@@ -11,15 +11,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import main.Wyszukiwanie;
+import main.Zwierzak;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
@@ -106,10 +100,11 @@ public class Przeszukaj {
 		btnFiltruj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				preFilter(cechy, kolor, kolorOczu, siersc, rasa);
-				Integer[] counter = properFilter(cechy);
-				Arrays.sort(counter,Collections.reverseOrder());
-				//for(int i=0;i<counter.length;i++) {System.out.println(counter[i]);}
+				Integer[] counter = getCounter(cechy);
+				ArrayList<Zwierzak> sorted = Wyszukiwanie.properFilter(name, counter);
 			}
+
+			
 		});
 		
 		JButton btnWstecz = new JButton("Wstecz");
@@ -209,7 +204,7 @@ public class Przeszukaj {
 		siersci=Wyszukiwanie.usun_duplikaty(cechy,2);
 		rasy=Wyszukiwanie.usun_duplikaty(cechy,3);
 	}
-	private Integer[] properFilter(String[][] cechy) {
+	private Integer[] getCounter(String[][] cechy) {
 		Integer[] counter = new Integer[cechy.length];
 		for(int i=0;i<cechy.length;i++) 
 		{	
@@ -221,19 +216,18 @@ public class Przeszukaj {
 					counter[i]+=1;
 				}
 			}
-			
 		}
 		return counter;
 	}
 
 	private void preFilter(String[][] cechy, JComboBox<Object> kolor, JComboBox<Object> kolorOczu,
-			JComboBox<Object> siersc, JComboBox<Object> rasa) {
+			JComboBox<Object> siersc, JComboBox<Object> rasa) 
+	{
 		filtry[0]=(String)kolor.getSelectedItem();
 		filtry[1]=(String)kolorOczu.getSelectedItem();
 		filtry[2]=(String)siersc.getSelectedItem();
-		filtry[3]=(String)rasa.getSelectedItem();
-		
-		
+		filtry[3]=(String)rasa.getSelectedItem();	
 	}
+	
 	
 }
