@@ -36,7 +36,7 @@ import java.awt.Component;
 public class BazaKoty {
 
 	private JFrame frame;
-	private String[][] cechy = new String[Kot.kotki.size()][4];
+	private static String[][] cechy = new String[Kot.kotki.size()][4];
 	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
@@ -358,7 +358,7 @@ public class BazaKoty {
 		cechy[i][2]=Kot.kotki.get(i).getRasa();
 		cechy[i][3]=Kot.kotki.get(i).getSiersc();
 	}
-	public String[][] getCechy(){
+	public static String[][] getCechy(){
 		return cechy;
 	}
 }
