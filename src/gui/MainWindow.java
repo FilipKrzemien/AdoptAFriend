@@ -71,7 +71,7 @@ public class MainWindow {
 				System.exit(0);
 			}
 		});
-		btnWyjd.setBounds(250, 345, 89, 23);
+		btnWyjd.setBounds(246, 345, 89, 23);
 		frame.getContentPane().add(btnWyjd);
 		
 		JPanel loguj = new JPanel();
