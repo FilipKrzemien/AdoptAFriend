@@ -39,6 +39,7 @@ public class BazaPsy {
 	private JFrame frame;
 	private JLabel lblNewLabel_10;
 	private String[][] cechy = new String[Pies.pieski.size()][4];
+	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
 	 */
@@ -139,105 +140,128 @@ public class BazaPsy {
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
 		for(int i=0;i<Pies.pieski.size();i++)
 		{		
-		JPanel panel = new JPanel();
-		JLabel lblNewLabel = new JLabel("");
-		String s = "PSY/" + Pies.pieski.get(i).getImie() + "_pies.jpg";
-		lblNewLabel.setIcon(new ImageIcon(s));
-		JLabel lblImi = new JLabel("Imi\u0119:");
-		lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JPanel panel = new JPanel();
+			JLabel lblNewLabel = new JLabel("");
+			String s = "PSY/" + Pies.pieski.get(i).getImie() + "_pies.jpg";
+			lblNewLabel.setIcon(new ImageIcon(s));
+			JLabel lblImi = new JLabel("Imi\u0119:");
+			lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblWiek = new JLabel("Wiek:");
-		lblWiek.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblWiek = new JLabel("Wiek:");
+			lblWiek.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblKolor = new JLabel("Kolor:");
-		lblKolor.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblKolor = new JLabel("Kolor:");
+			lblKolor.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblKolorOczu = new JLabel("Kolor oczu:");
-		lblKolorOczu.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblKolorOczu = new JLabel("Kolor oczu:");
+			lblKolorOczu.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblWielko = new JLabel("Wielko\u015B\u0107:");
-		lblWielko.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblWielko = new JLabel("Wielko\u015B\u0107:");
+			lblWielko.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblRasa = new JLabel("Rasa:");
-		lblRasa.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblRasa = new JLabel("Rasa:");
+			lblRasa.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblDugoSierci = new JLabel("D\u0142ugo\u015B\u0107 sier\u015Bci:");
-		lblDugoSierci.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblDugoSierci = new JLabel("D\u0142ugo\u015B\u0107 sier\u015Bci:");
+			lblDugoSierci.setFont(new Font("Tahoma", Font.BOLD, 12));
+			
+			JLabel lblDataZnalezienia = new JLabel("Data znalezienia:");
+			lblDataZnalezienia.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblDataZnalezienia = new JLabel("Data znalezienia:");
-		lblDataZnalezienia.setFont(new Font("Tahoma", Font.BOLD, 12));
+			JLabel lblOpis = new JLabel("Opis:");
+			lblOpis.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblOpis = new JLabel("Opis:");
-		lblOpis.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNewLabel_1 = new JLabel(Pies.pieski.get(i).getImie());
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_2 = new JLabel(Integer.toString(Pies.pieski.get(i).getWiek()));
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_3 = new JLabel(Pies.pieski.get(i).getKolor());
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_4 = new JLabel(Pies.pieski.get(i).getKolorOczu());
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		if(((Pies) Pies.pieski.get(i)).getWielkosc()==1) {
-			lblNewLabel_10 = new JLabel("Ma³y");
-		}
-		else if(((Pies) Pies.pieski.get(i)).getWielkosc()==2) {
-			lblNewLabel_10 = new JLabel("Œredni");				
-		}
-		else if(((Pies) Pies.pieski.get(i)).getWielkosc()==3) {
-			lblNewLabel_10 = new JLabel("Du¿y");				
-		}
-		//lblNewLabel_10 = new JLabel(Integer.toString(((Pies) Pies.pieski.get(i)).getWielkosc()));
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_6 = new JLabel(Pies.pieski.get(i).getRasa());
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_7 = new JLabel(Pies.pieski.get(i).getSiersc());
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		JLabel lblNewLabel_8 = new JLabel(Pies.pieski.get(i).getDataZnalezienia());
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		setCechy(cechy, i);
-		JTextArea txtr = new JTextArea();
-		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtr.setText(Pies.pieski.get(i).getOpis());
-		txtr.setLineWrap(true);
-		txtr.setWrapStyleWord(true);
-		txtr.setOpaque(false);
-		JButton btnAdoptuj = new JButton("ADOPTUJ");
-		int j=i+1;
-		btnAdoptuj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				String[] args = null;
-				FormularzAdopt.main(args, j, "Pies");
+			JLabel lblNewLabel_1 = new JLabel(Pies.pieski.get(i).getImie());
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_2 = new JLabel(Integer.toString(Pies.pieski.get(i).getWiek()));
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_3 = new JLabel(Pies.pieski.get(i).getKolor());
+			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_4 = new JLabel(Pies.pieski.get(i).getKolorOczu());
+			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			if(((Pies) Pies.pieski.get(i)).getWielkosc()==1) {
+				lblNewLabel_10 = new JLabel("Ma³y");
 			}
-		});
+			else if(((Pies) Pies.pieski.get(i)).getWielkosc()==2) {
+				lblNewLabel_10 = new JLabel("Œredni");				
+			}
+			else if(((Pies) Pies.pieski.get(i)).getWielkosc()==3) {
+				lblNewLabel_10 = new JLabel("Du¿y");				
+			}
+			//lblNewLabel_10 = new JLabel(Integer.toString(((Pies) Pies.pieski.get(i)).getWielkosc()));
+			lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_6 = new JLabel(Pies.pieski.get(i).getRasa());
+			lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_7 = new JLabel(Pies.pieski.get(i).getSiersc());
+			lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JLabel lblNewLabel_8 = new JLabel(Pies.pieski.get(i).getDataZnalezienia());
+			lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			setCechy(cechy, i);
+			JTextArea txtr = new JTextArea();
+			txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			txtr.setText(Pies.pieski.get(i).getOpis());
+			txtr.setLineWrap(true);
+			txtr.setWrapStyleWord(true);
+			txtr.setOpaque(false);
+			int j=i+1;
+			if(User.getZaloguj()==1)
+			{
+				btnAdoptuj = new JButton("USUÑ");
+				btnAdoptuj.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frame.dispose();
+						Pies pies = new Pies();
+						try {
+							pies.adoptuj(j);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String[] args = null;
+						BazaPsy.main(args);
+					}
+				});
+			}
+			else
+			{
+				btnAdoptuj = new JButton("ADOPTUJ");
+				btnAdoptuj.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frame.dispose();
+						String[] args = null;
+						FormularzAdopt.main(args, j, "Pies");
+					}
+				});
+			}
 
-		JSeparator separator = new JSeparator();
+
+
+			JSeparator separator = new JSeparator();
 		
-		JLabel lblNewLabel_11 = new JLabel("");
-		File imageMale = new File("GUI/male.png");
-		File imageFemale = new File("GUI/female.png");
-		String plec = "samiec";
-		if(plec.equals(Pies.pieski.get(i).getPlec()))
-		{
-			try {
-				BufferedImage imagemale = ImageIO.read(imageMale);
-				lblNewLabel_11.setIcon(new ImageIcon(imagemale));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-		}
-		else
-		{
-			try {
-				BufferedImage imagefemale = ImageIO.read(imageFemale);
-				lblNewLabel_11.setIcon(new ImageIcon(imagefemale));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		}
+			JLabel lblNewLabel_11 = new JLabel("");
+			File imageMale = new File("GUI/male.png");
+			File imageFemale = new File("GUI/female.png");
+			String plec = "samiec";
+			if(plec.equals(Pies.pieski.get(i).getPlec()))
+			{
+				try {
+					BufferedImage imagemale = ImageIO.read(imageMale);
+					lblNewLabel_11.setIcon(new ImageIcon(imagemale));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+			else
+			{
+				try {
+					BufferedImage imagefemale = ImageIO.read(imageFemale);
+					lblNewLabel_11.setIcon(new ImageIcon(imagefemale));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			
+			}
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

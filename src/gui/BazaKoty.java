@@ -37,6 +37,7 @@ public class BazaKoty {
 
 	private JFrame frame;
 	private String[][] cechy = new String[Kot.kotki.size()][4];
+	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
 	 */
@@ -188,15 +189,38 @@ public class BazaKoty {
 		txtr.setLineWrap(true);
 		txtr.setWrapStyleWord(true);
 		txtr.setOpaque(false);
-		JButton btnAdoptuj = new JButton("ADOPTUJ");
 		int j=i+1;
-		btnAdoptuj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				String[] args = null;
-				FormularzAdopt.main(args, j, "Kot");
-			}
-		});
+		if(User.getZaloguj()==1)
+		{
+			btnAdoptuj = new JButton("USUÑ");
+			btnAdoptuj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					Kot kot = new Kot();
+					try {
+						kot.adoptuj(j);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String[] args = null;
+					BazaKoty.main(args);
+				}
+			});
+		}
+		else
+		{
+			btnAdoptuj = new JButton("ADOPTUJ");
+			btnAdoptuj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					String[] args = null;
+					FormularzAdopt.main(args, j, "Kot");
+				}
+			});
+		}
+
+
 
 		JSeparator separator = new JSeparator();
 		
