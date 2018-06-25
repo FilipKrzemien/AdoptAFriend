@@ -38,7 +38,7 @@ public class BazaPsy {
 
 	private JFrame frame;
 	private JLabel lblNewLabel_10;
-	private String[][] cechy = new String[Pies.pieski.size()][4];
+	private static String[][] cechy = new String[Pies.pieski.size()][4];
 	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
@@ -377,7 +377,7 @@ public class BazaPsy {
 		cechy[i][2]=Pies.pieski.get(i).getRasa();
 		cechy[i][3]=Pies.pieski.get(i).getSiersc();
 	}
-	public String[][] getCechy(){
+	public static String[][] getCechy(){
 		return cechy;
 	}
 }

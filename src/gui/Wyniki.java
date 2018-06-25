@@ -93,6 +93,24 @@ public class Wyniki {
 		});
 		panel_2.add(btnWstecz);
 		
+		JButton btnSzukajPonownie = new JButton("SZUKAJ PONOWNIE");
+		btnSzukajPonownie.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				String[] args = null;
+				if(name.equals("Kot")) {
+					Przeszukaj.main(args, name,BazaKoty.getCechy());
+				}
+				else {
+					Przeszukaj.main(args, name,BazaPsy.getCechy());
+				}
+				
+			}
+		
+		}
+		);
+		panel_2.add(btnSzukajPonownie);
+
 		JButton btnWyjd = new JButton(" WYJD\u0179 ");
 		btnWyjd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -100,6 +118,7 @@ public class Wyniki {
 			}
 		});
 		panel_2.add(btnWyjd);
+		
 		
 		JLabel lblNewLabel_9 = new JLabel("Wyniki Wyszukiwania ");
 		lblNewLabel_9.setAlignmentX(Component.CENTER_ALIGNMENT);

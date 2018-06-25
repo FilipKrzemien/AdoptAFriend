@@ -102,6 +102,7 @@ public class Przeszukaj {
 				preFilter(cechy, kolor, kolorOczu, siersc, rasa);
 				Integer[] counter = getCounter(cechy);
 				ArrayList<Zwierzak> sorted = Wyszukiwanie.properFilter(name, counter);
+				frame.dispose();
 				Wyniki.main(name,sorted);
 			}
 
