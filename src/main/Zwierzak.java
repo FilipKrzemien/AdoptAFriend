@@ -71,11 +71,10 @@ public abstract class Zwierzak {
 		if(name.equals(Pies.class.getSimpleName()))
 		{
 			s = "PSY/" + Pies.pieski.get(i-1).getImie() + "_pies.jpg";
-			System.out.println(Pies.pieski.get(i-1).getImie());
 		}
 		else
 		{
-			s = "KOTY/" + Pies.pieski.get(i-1).getImie() + "_kot.jpg";			
+			s = "KOTY/" + Kot.kotki.get(i-1).getImie() + "_kot.jpg";			
 		}
 		File file = new File(s);
 		file.delete();

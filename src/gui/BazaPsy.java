@@ -23,6 +23,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import main.Pies;
+import main.User;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -37,7 +38,7 @@ public class BazaPsy {
 
 	private JFrame frame;
 	private JLabel lblNewLabel_10;
-	
+	private String[][] cechy = new String[Pies.pieski.size()][4];
 	/**
 	 * Launch the application.
 	 */
@@ -65,7 +66,8 @@ public class BazaPsy {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,17 +94,37 @@ public class BazaPsy {
 			}
 		});
 		panel_2.add(btnWstecz);
-		
+	
+		JButton btnDodaj = new JButton("DODAJ");
+		if(User.getZaloguj()==1)
+		{
+			btnDodaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					System.out.println("Dodawanko");
+					//String[] args = null;
+					//MainWindow.main(args);
+				}
+			});
+			btnDodaj.setEnabled(true);	
+		}
+		else
+		{
+			btnDodaj.setEnabled(false);
+		}
+		panel_2.add(btnDodaj);
+
 		JButton btnSzukaj = new JButton("SZUKAJ");
 		btnSzukaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
+				String[] args = null;
+				Przeszukaj.main(args, "Pies",getCechy());
 			}
 		});
-		panel_2.add(btnSzukaj);
+		panel_2.add(btnSzukaj);	
 		
 		JButton btnWyjd = new JButton(" WYJD\u0179 ");
-		btnWyjd.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnWyjd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -173,6 +195,7 @@ public class BazaPsy {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		JLabel lblNewLabel_8 = new JLabel(Pies.pieski.get(i).getDataZnalezienia());
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		setCechy(cechy, i);
 		JTextArea txtr = new JTextArea();
 		txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtr.setText(Pies.pieski.get(i).getOpis());
@@ -322,5 +345,15 @@ public class BazaPsy {
 		    }
 		});
 		}
+	}
+
+	private void setCechy(String[][] cechy, int i) {
+		cechy[i][0]=Pies.pieski.get(i).getKolor();
+		cechy[i][1]=Pies.pieski.get(i).getKolorOczu();
+		cechy[i][2]=Pies.pieski.get(i).getRasa();
+		cechy[i][3]=Pies.pieski.get(i).getSiersc();
+	}
+	public String[][] getCechy(){
+		return cechy;
 	}
 }

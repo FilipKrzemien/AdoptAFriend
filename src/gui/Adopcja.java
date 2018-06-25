@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import main.Kandydat;
 import main.Kot;
 import main.Pies;
 
@@ -24,11 +25,11 @@ public class Adopcja {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, String name, int j) {
+	public static void main(String[] args, String name, int j, Kandydat kandydat) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Adopcja window = new Adopcja(name, j);
+					Adopcja window = new Adopcja(name, j, kandydat);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,14 +41,14 @@ public class Adopcja {
 	/**
 	 * Create the application.
 	 */
-	public Adopcja(String name, int j) {
-		initialize(name, j);
+	public Adopcja(String name, int j, Kandydat kandydat) {
+		initialize(name, j, kandydat);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String name, int j) {
+	private void initialize(String name, int j, Kandydat kandydat) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,6 +98,26 @@ public class Adopcja {
 		btnDrukijDokument.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				if(name.equals(Pies.class.getSimpleName()))
+				{
+					try {
+						Kandydat.zapis("pies", k, kandydat);
+						pies.adoptuj(j);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else
+				{
+					try {
+						Kandydat.zapis("kot", k, kandydat);		
+						kot.adoptuj(j);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 				String[] args = null;
 				Potwierdzenie.main(args);
 			}
@@ -149,24 +170,5 @@ public class Adopcja {
 		opistext.setOpaque(false);
 		opistext.setBounds(251, 248, 305, 93);
 		frame.getContentPane().add(opistext);
-		
-		if(name.equals(Pies.class.getSimpleName()))
-		{
-			try {
-				pies.adoptuj(j);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		else
-		{
-			try {
-				kot.adoptuj(j);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
 	}
 }
