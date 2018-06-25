@@ -2,7 +2,7 @@
 
 Priorytet:
 1. Przegladanie dostepnych zwierzat - zrobione.
-2. Wyszukiwanie zwierzat po kategoriach - FILIP
+2. Wyszukiwanie zwierzat po kategoriach - zrobione.
 3. Usuwanie z bazy już adoptowanych - zrobione.
 4. panel logowania admin - zrobione.
 5. dodawanie zwierzaków (dodawanie jest gotowe, wystarczy dorobić GUI i przerobić kod) - ZOCHA
