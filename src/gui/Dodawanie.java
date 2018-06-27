@@ -7,19 +7,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import main.Kot;
-import main.Pies;
-import main.Zwierzak;
+//import main.Kot;
+//import main.Pies;
+//import main.Zwierzak;
 
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.awt.event.ActionEvent;
 
 public class Dodawanie {
@@ -75,8 +71,8 @@ public class Dodawanie {
 		lblGatunek.setBounds(12, 64, 56, 16);
 		frame.getContentPane().add(lblGatunek);
 		
-		JComboBox gatunek = new JComboBox();
-		gatunek.setModel(new DefaultComboBoxModel(new String[] {"Kot", "Pies"}));
+		JComboBox<Object> gatunek = new JComboBox<Object>();
+		gatunek.setModel(new DefaultComboBoxModel<Object>(new String[] {"Kot", "Pies"}));
 		gatunek.setBounds(125, 63, 67, 19);
 		frame.getContentPane().add(gatunek);
 		
@@ -90,8 +86,8 @@ public class Dodawanie {
 		lblPlec.setBounds(12, 169, 56, 16);
 		frame.getContentPane().add(lblPlec);
 		
-		JComboBox plec = new JComboBox();
-		plec.setModel(new DefaultComboBoxModel(new String[] {"Samiec", "Samica"}));
+		JComboBox<Object> plec = new JComboBox<Object>();
+		plec.setModel(new DefaultComboBoxModel<Object>(new String[] {"Samiec", "Samica"}));
 		plec.setBounds(125, 168, 67, 19);
 		frame.getContentPane().add(plec);
 		
@@ -135,8 +131,8 @@ public class Dodawanie {
 		lblSiersc.setBounds(12, 338, 104, 16);
 		frame.getContentPane().add(lblSiersc);
 		
-		JComboBox siersc = new JComboBox();
-		siersc.setModel(new DefaultComboBoxModel(new String[] {"kr\u00F3tka", "\u015Brednia", "d\u0142uga"}));
+		JComboBox<Object> siersc = new JComboBox<Object>();
+		siersc.setModel(new DefaultComboBoxModel<Object>(new String[] {"kr\u00F3tka", "\u015Brednia", "d\u0142uga"}));
 		siersc.setBounds(125, 337, 67, 19);
 		frame.getContentPane().add(siersc);
 		
@@ -150,18 +146,18 @@ public class Dodawanie {
 		lblData.setBounds(12, 370, 104, 16);
 		frame.getContentPane().add(lblData);
 		
-		JComboBox dzien = new JComboBox();
-		dzien.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		JComboBox<Object> dzien = new JComboBox<Object>();
+		dzien.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		dzien.setBounds(126, 369, 35, 19);
 		frame.getContentPane().add(dzien);
 		
-		JComboBox miesiac = new JComboBox();
-		miesiac.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		JComboBox<Object> miesiac = new JComboBox<Object>();
+		miesiac.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 		miesiac.setBounds(173, 369, 35, 19);
 		frame.getContentPane().add(miesiac);
 		
-		JComboBox rok = new JComboBox();
-		rok.setModel(new DefaultComboBoxModel(new String[] {"2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000"}));
+		JComboBox<Object> rok = new JComboBox<Object>();
+		rok.setModel(new DefaultComboBoxModel<Object>(new String[] {"2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000"}));
 		rok.setBounds(218, 369, 55, 19);
 		frame.getContentPane().add(rok);
 		
@@ -175,10 +171,10 @@ public class Dodawanie {
 		opis.setBounds(125, 401, 255, 101);
 		frame.getContentPane().add(opis);
 		
-		JLabel lblZdjcie = new JLabel("Zdj\u0119cie:");
-		lblZdjcie.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblZdjcie.setBounds(12, 519, 104, 16);
-		frame.getContentPane().add(lblZdjcie);
+		JLabel lblZdj = new JLabel("Zdj\u0119cie:");
+		lblZdj.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblZdj.setBounds(12, 519, 104, 16);
+		frame.getContentPane().add(lblZdj);
 		
 		JButton btnDodaj = new JButton("Dodaj zdj\u0119cie");
 		btnDodaj.setBounds(125, 515, 120, 25);
@@ -201,8 +197,8 @@ public class Dodawanie {
 		lblNewLabel.setBounds(256, 519, 56, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JComboBox wielkosc = new JComboBox();
-		wielkosc.setModel(new DefaultComboBoxModel(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
+		JComboBox<Object> wielkosc = new JComboBox<Object>();
+		wielkosc.setModel(new DefaultComboBoxModel<Object>(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
 		wielkosc.setBounds(125, 270, 67, 19);
 		frame.getContentPane().add(wielkosc);
 		
