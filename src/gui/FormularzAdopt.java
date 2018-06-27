@@ -125,10 +125,14 @@ public class FormularzAdopt {
 		email = new JTextField();
 		email.setColumns(10);
 		
+		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2);
+		
 		//TUTAJ JEST JLABEL KTORY TRZEBA POJAWIAC PRZY BLEDZIE
 		//TRZEBA TO PRZENIESC NA POCZATEK TEJ METODY - LINIA 71
 		//POTEM ZROBIC TE TRY...CATCH DO ODPOWIEDNICH DANYCH :)
 		JLabel blad = new JLabel("Brakuje danych lub niepoprawne dane");
+		panel_2.add(blad);
 		blad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		blad.setForeground(new Color(255, 0, 0));
 		blad.setVisible(false);
@@ -232,52 +236,49 @@ public class FormularzAdopt {
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnAnuluj)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnWylij))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblImi, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNazwisko)
-								.addComponent(lblDzien)
-								.addComponent(lblAdres)
-								.addComponent(lblNumerTelefonu)
-								.addComponent(lblNewLabel))
-							.addGap(20)
+							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(9)
-									.addComponent(dzien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(miesiac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addComponent(btnAnuluj)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnWylij))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(10)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblImi, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNazwisko)
+										.addComponent(lblDzien)
+										.addComponent(lblAdres)
+										.addComponent(lblNumerTelefonu)
+										.addComponent(lblNewLabel))
+									.addGap(20)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(telefon, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
-										.addComponent(adres, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-										.addComponent(email)))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(10)
-									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(nazwisko, Alignment.LEADING)
-										.addComponent(imie, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))))
-							.addGap(117)))
-					.addGap(135))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(168)
-					.addComponent(lblFormularzAdopcyjny, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(261, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-					.addGap(168)
-					.addComponent(blad)
-					.addContainerGap(306, Short.MAX_VALUE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(9)
+											.addComponent(dzien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(miesiac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(10)
+											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(telefon, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+												.addComponent(adres, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+												.addComponent(email)))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(10)
+											.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(nazwisko, Alignment.LEADING)
+												.addComponent(imie, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))))
+									.addGap(117))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(168)
+							.addComponent(lblFormularzAdopcyjny, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(135, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -313,9 +314,7 @@ public class FormularzAdopt {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAnuluj)
 						.addComponent(btnWylij))
-					.addGap(71)
-					.addComponent(blad)
-					.addContainerGap(50, Short.MAX_VALUE))
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 	}
