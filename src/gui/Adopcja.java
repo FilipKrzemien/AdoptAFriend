@@ -1,9 +1,12 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -53,6 +56,9 @@ public class Adopcja {
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		
 		JLabel lblPies;
 		JLabel imietext = null;
 		JLabel wiektext = null;

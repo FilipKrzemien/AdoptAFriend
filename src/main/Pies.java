@@ -49,34 +49,13 @@ public class Pies extends Zwierzak {
                 System.out.println("Utworzono nowa baze " + nazwa);
             }
             catch(IOException e){
-                System.out.println("Nie mo¿na utworzyæ bazy " + nazwa);
+                System.out.println("Nie moÂ¿na utworzyÃ¦ bazy " + nazwa);
             }
         }
     }
 	
-	public void dodBaza() throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Podaj imie: ");
-		setImie(in.readLine());
-		System.out.println("Podaj wiek: ");
-		setWiek(Integer.parseInt(in.readLine()));
-		System.out.println("Podaj plec(samiec/samica): ");
-		setPlec(in.readLine());
-		System.out.println("Podaj kolor: ");
-		setKolor(in.readLine());
-		System.out.println("Podaj kolor oczu: ");
-		setKolorOczu(in.readLine());
-		System.out.println("Podaj wiekosc (1-maly, 2-sredni, 3-duzy): ");
-		setWielkosc(Integer.parseInt(in.readLine()));
-		System.out.println("Podaj jaka to rasa: ");
-		setRasa(in.readLine());
-		System.out.println("Podaj dlugosc siersci: ");
-		setSiersc(in.readLine());
-		System.out.println("Podaj date znalezienia: ");
-		setDataZnalezienia(in.readLine());
-		System.out.println("Podaj opis: ");
-		setOpis(in.readLine());
-		pieski.add(new Pies(getImie(),getWiek(),getPlec(), getKolor(),getKolorOczu(),getWielkosc(),getRasa(), getSiersc(), getDataZnalezienia(),getOpis()));
+	public void dodBaza(ArrayList<String> dane) throws IOException {
+		pieski.add(new Pies(dane.get(0),Integer.parseInt(dane.get(1)),dane.get(2),dane.get(3),dane.get(4),Integer.parseInt(dane.get(5)),dane.get(6),dane.get(7),dane.get(8),dane.get(9)
 	}
 	
 	public void adoptuj(int i) throws IOException {
