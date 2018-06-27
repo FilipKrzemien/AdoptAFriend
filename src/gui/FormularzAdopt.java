@@ -22,6 +22,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -120,23 +125,91 @@ public class FormularzAdopt {
 		email = new JTextField();
 		email.setColumns(10);
 		
+		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2);
+		
+		//TUTAJ JEST JLABEL KTORY TRZEBA POJAWIAC PRZY BLEDZIE
+		//TRZEBA TO PRZENIESC NA POCZATEK TEJ METODY - LINIA 71
+		//POTEM ZROBIC TE TRY...CATCH DO ODPOWIEDNICH DANYCH :)
+		JLabel blad = new JLabel("Brakuje danych lub niepoprawne dane");
+		panel_2.add(blad);
+		blad.setFont(new Font("Tahoma", Font.BOLD, 12));
+		blad.setForeground(new Color(255, 0, 0));
+		blad.setVisible(false);
+		//KONIEC TEGO JLABEL
 
+		
 		JButton btnWylij = new JButton("WY\u015ALIJ");
 		btnWylij.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] args = null;
-				Kandydat kandydat = new Kandydat(imie.getText(),nazwisko.getText(),
-						dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString(),
-						adres.getText(),telefon.getText(),email.getText());
-				if(name.equals(Pies.class.getSimpleName()))
+				try 
+				{		
+					blad.setVisible(false);
+					
+					String birthdate = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
+					DateFormat formatter;
+					Date date;
+					ZonedDateTime now = ZonedDateTime.now();
+					ZonedDateTime sixteen_years_ago = now.plusYears(-16);
+					
+					formatter = new SimpleDateFormat("dd/mm/yyyy");
+					System.out.println(birthdate);
+					date = formatter.parse(birthdate);
+					if(imie.getText().equals("") || nazwisko.getText().equals("") || 
+							email.getText().equals("") || telefon.getText().equals("") || 
+							adres.getText().equals(""))
+					{
+						System.out.println("Empty input");
+						throw new NumberFormatException();
+					}
+							
+					if(!date.toInstant().isBefore(sixteen_years_ago.toInstant()))
+					{
+						System.out.println("Too young");
+						throw new NumberFormatException();
+					}
+					if(!imie.getText().matches("[A-Za-z]+") || !nazwisko.getText().matches("[A-Za-z]+"))
+					{
+						System.out.println("Invalid name or surname");
+						throw new NumberFormatException();
+					}
+					if(!email.getText().contains("@"))
+					{
+						System.out.println("Invalid email");
+						throw new NumberFormatException();
+					}
+					if(!telefon.getText().matches("[0-9]+"))
+					{
+						System.out.println("Invalid phone number");
+						throw new NumberFormatException();
+					}
+					if(telefon.getText().length()!=9)
+					{
+						System.out.println("Wrong phone number lenght");
+						throw new NumberFormatException();
+					}
+					String[] args = null;
+					Kandydat kandydat = new Kandydat(imie.getText(),nazwisko.getText(),
+							birthdate,adres.getText(),telefon.getText(),email.getText());
+					
+					if(name.equals(Pies.class.getSimpleName()))
+					{
+						frame.dispose();
+						Adopcja.main(args, "Pies", j, kandydat);
+					}
+					else
+					{
+						frame.dispose();
+						Adopcja.main(args, "Kot", j, kandydat);
+					}
+				} 
+				catch(NumberFormatException e1)
 				{
-					frame.dispose();
-					Adopcja.main(args, "Pies", j, kandydat);
+					blad.setVisible(true);
 				}
-				else
+				catch(ParseException e1)
 				{
-					frame.dispose();
-					Adopcja.main(args, "Kot", j, kandydat);
+					
 				}
 			}
 		});
@@ -161,64 +234,51 @@ public class FormularzAdopt {
 		JLabel lblFormularzAdopcyjny = new JLabel("FORMULARZ ADOPCYJNY");
 		lblFormularzAdopcyjny.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 		
-		
-		//TUTAJ JEST JLABEL KTORY TRZEBA POJAWIAC PRZY BLEDZIE
-		//TRZEBA TO PRZENIESC NA POCZATEK TEJ METODY - LINIA 71
-		//POTEM ZROBIC TE TRY...CATCH DO ODPOWIEDNICH DANYCH :)
-		JLabel blad = new JLabel("Brakuje danych lub niepoprawne dane");
-		blad.setFont(new Font("Tahoma", Font.BOLD, 12));
-		blad.setForeground(new Color(255, 0, 0));
-		blad.setVisible(false);
-		//KONIEC TEGO JLABEL
-		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnAnuluj)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnWylij))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblImi, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNazwisko)
-								.addComponent(lblDzien)
-								.addComponent(lblAdres)
-								.addComponent(lblNumerTelefonu)
-								.addComponent(lblNewLabel))
-							.addGap(20)
+							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(9)
-									.addComponent(dzien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(miesiac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addComponent(btnAnuluj)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnWylij))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(10)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblImi, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNazwisko)
+										.addComponent(lblDzien)
+										.addComponent(lblAdres)
+										.addComponent(lblNumerTelefonu)
+										.addComponent(lblNewLabel))
+									.addGap(20)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(telefon, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
-										.addComponent(adres, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-										.addComponent(email)))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(10)
-									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(nazwisko, Alignment.LEADING)
-										.addComponent(imie, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))))
-							.addGap(117)))
-					.addGap(135))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(168)
-					.addComponent(lblFormularzAdopcyjny, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(261, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-					.addGap(168)
-					.addComponent(blad)
-					.addContainerGap(306, Short.MAX_VALUE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(9)
+											.addComponent(dzien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(miesiac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(10)
+											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(telefon, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+												.addComponent(adres, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+												.addComponent(email)))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(10)
+											.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(nazwisko, Alignment.LEADING)
+												.addComponent(imie, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))))
+									.addGap(117))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(168)
+							.addComponent(lblFormularzAdopcyjny, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(135, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -254,9 +314,7 @@ public class FormularzAdopt {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAnuluj)
 						.addComponent(btnWylij))
-					.addGap(71)
-					.addComponent(blad)
-					.addContainerGap(50, Short.MAX_VALUE))
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 	}
