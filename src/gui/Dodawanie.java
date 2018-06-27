@@ -7,17 +7,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-//import main.Kot;
-//import main.Pies;
-//import main.Zwierzak;
+import main.Kot;
+import main.Pies;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JTextArea;
 
 public class Dodawanie {
 
@@ -26,7 +27,6 @@ public class Dodawanie {
 	private JTextField masc;
 	private JTextField oczy;
 	private JTextField rasa;
-	private JTextField opis;
 	private JTextField wiek;
 
 	/**
@@ -167,11 +167,6 @@ public class Dodawanie {
 		lblOpis.setBounds(12, 410, 104, 16);
 		frame.getContentPane().add(lblOpis);
 		
-		opis = new JTextField();
-		opis.setColumns(10);
-		opis.setBounds(125, 410, 255, 101);
-		frame.getContentPane().add(opis);
-		
 		JLabel lblZdj = new JLabel("Zdj\u0119cie:");
 		lblZdj.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblZdj.setBounds(12, 528, 104, 16);
@@ -186,7 +181,16 @@ public class Dodawanie {
 		wielkosc.setBounds(125, 267, 95, 25);
 		frame.getContentPane().add(wielkosc);
 		
+		JTextArea opis = new JTextArea();
+		opis.setBounds(125, 410, 255, 101);
+		frame.getContentPane().add(opis);
+		
 		JButton btnAnuluj = new JButton("Anuluj");
+		btnAnuluj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnAnuluj.setBounds(12, 575, 97, 25);
 		frame.getContentPane().add(btnAnuluj);
 		
@@ -195,21 +199,47 @@ public class Dodawanie {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String data = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
-				String pies = "Pies";
+				String piesstr = "Pies";
 				ArrayList<String> dane = new ArrayList<String>();
 				dane.add(imie.getText());
 				dane.add(wiek.getText());
 				dane.add(plec.getSelectedItem().toString());
 				dane.add(masc.getText());
 				dane.add(oczy.getText());
-				if(pies.equals(gatunek.getSelectedItem().toString())) {
-				dane.add(wielkosc.getSelectedItem().toString());
+				if(piesstr.equals(gatunek.getSelectedItem().toString())) {
+					String pom = wielkosc.getSelectedItem().toString();
+					int wlk = 0;
+					if(pom.equals("ma³y")) {
+						wlk=1;
+					} else if (pom.equals("œredni")) {
+						wlk=2;
+					} else if (pom.equals("du¿y")) {
+						wlk=3;
+					}
+					dane.add(Integer.toString(wlk));
 				}
 				dane.add(rasa.getText());
 				dane.add(siersc.getSelectedItem().toString());
 				dane.add(data);
 				dane.add(opis.getText());
 				
+				if (piesstr.equals(gatunek.getSelectedItem().toString())) {
+					Pies pies = new Pies();
+					try {
+						pies.dodBaza(dane);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					Kot kot = new Kot();
+					try {
+						kot.dodBaza(dane);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 		btnZatwierd.setBounds(323, 575, 97, 25);
@@ -229,5 +259,7 @@ public class Dodawanie {
 		wiek.setColumns(10);
 		wiek.setBounds(125, 132, 255, 25);
 		frame.getContentPane().add(wiek);
+		
+		
 	}
 }
