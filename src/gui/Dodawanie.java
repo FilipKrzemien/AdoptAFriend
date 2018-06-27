@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class Dodawanie {
 
@@ -106,10 +107,10 @@ public class Dodawanie {
 		lblOczy.setBounds(12, 238, 88, 16);
 		frame.getContentPane().add(lblOczy);
 		
-		JLabel lblWielk = new JLabel("Wielko\u015B\u0107:");
-		lblWielk.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblWielk.setBounds(12, 271, 56, 16);
-		frame.getContentPane().add(lblWielk);
+		JLabel lblWielkosc = new JLabel("Wielko\u015B\u0107:");
+		lblWielkosc.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblWielkosc.setBounds(12, 271, 56, 16);
+		frame.getContentPane().add(lblWielkosc);
 		
 		masc = new JTextField();
 		masc.setColumns(10);
@@ -180,6 +181,11 @@ public class Dodawanie {
 		btnDodaj.setBounds(125, 524, 120, 25);
 		frame.getContentPane().add(btnDodaj);
 		
+		JComboBox<Object> wielkosc = new JComboBox<Object>();
+		wielkosc.setModel(new DefaultComboBoxModel<Object>(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
+		wielkosc.setBounds(125, 267, 95, 25);
+		frame.getContentPane().add(wielkosc);
+		
 		JButton btnAnuluj = new JButton("Anuluj");
 		btnAnuluj.setBounds(12, 575, 97, 25);
 		frame.getContentPane().add(btnAnuluj);
@@ -187,6 +193,22 @@ public class Dodawanie {
 		JButton btnZatwierd = new JButton("Dodaj");
 		btnZatwierd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				String data = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
+				String pies = "Pies";
+				ArrayList<String> dane = new ArrayList<String>();
+				dane.add(imie.getText());
+				dane.add(wiek.getText());
+				dane.add(plec.getSelectedItem().toString());
+				dane.add(masc.getText());
+				dane.add(oczy.getText());
+				if(pies.equals(gatunek.getSelectedItem().toString())) {
+				dane.add(wielkosc.getSelectedItem().toString());
+				}
+				dane.add(rasa.getText());
+				dane.add(siersc.getSelectedItem().toString());
+				dane.add(data);
+				dane.add(opis.getText());
 				
 			}
 		});
@@ -197,10 +219,6 @@ public class Dodawanie {
 		lblNewLabel.setBounds(256, 528, 56, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JComboBox<Object> wielkosc = new JComboBox<Object>();
-		wielkosc.setModel(new DefaultComboBoxModel<Object>(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
-		wielkosc.setBounds(125, 267, 95, 25);
-		frame.getContentPane().add(wielkosc);
 		
 		JLabel lblWiek = new JLabel("Wiek:");
 		lblWiek.setFont(new Font("Tahoma", Font.BOLD, 12));
