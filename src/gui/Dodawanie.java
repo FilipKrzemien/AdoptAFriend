@@ -207,6 +207,7 @@ public class Dodawanie {
 		opis.setLineWrap(true);
 		opis.setWrapStyleWord(true);
 		opis.setBounds(125, 410, 255, 101);
+		opis.setBorder(new JTextField().getBorder());
 		frame.getContentPane().add(opis);
 		
 		JButton btnDodaj = new JButton("Dodaj zdj\u0119cie");
@@ -329,61 +330,85 @@ public class Dodawanie {
 		wielkosc.setBounds(125, 267, 95, 25);
 		frame.getContentPane().add(wielkosc);
 		
+		JLabel lblError = new JLabel("Brak danych lub niepoprawne dane");
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblError.setForeground(Color.RED);
+		lblError.setBounds(12, 596, 412, 14);
+		lblError.setVisible(false);
+		frame.getContentPane().add(lblError);
+		
 		JButton btnZatwierd = new JButton("Dodaj");
 		btnZatwierd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				String data = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
-				ArrayList<String> dane = new ArrayList<String>();
-				dane.add(imie.getText());
-				dane.add(wiek.getText());
-				dane.add(plec.getSelectedItem().toString());
-				dane.add(masc.getText());
-				dane.add(oczy.getText());
-				if(piesstr.equals(gatunek.getSelectedItem().toString())) {
-					String pom = wielkosc.getSelectedItem().toString();
-					int wlk = 0;
-					if(pom.equals("mały")) {
-						wlk=1;
-					} else if (pom.equals("średni")) {
-						wlk=2;
-					} else if (pom.equals("duży")) {
-						wlk=3;
-					}
-					dane.add(Integer.toString(wlk));
-				}
-				dane.add(rasa.getText());
-				dane.add(siersc.getSelectedItem().toString());
-				dane.add(data);
-				dane.add(opis.getText());
-				
-				if (piesstr.equals(gatunek.getSelectedItem().toString())) {
-					Pies pies = new Pies();
-					try {
-						pies.dodBaza(dane);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					Kot kot = new Kot();
-					try {
-						kot.dodBaza(dane);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				frame.dispose();
 				try {
-					Pies.reloadBaza();
-					Kot.reloadBaza();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					if(!imie.getText().matches("[a-zA-Z\\s\'\"]+") || !masc.getText().matches("[a-zA-Z\\s\'\"]+") || !oczy.getText().matches("[a-zA-Z\\s\'\"]+")
+							|| !rasa.getText().matches("[a-zA-Z\\s\'\"]+"))
+						throw new NumberFormatException();
+					
+					if(imie.getText().isEmpty() || wiek.getText().isEmpty() || masc.getText().isEmpty() 
+							|| oczy.getText().isEmpty() || rasa.getText().isEmpty() || opis.getText().isEmpty())
+						
+						throw new NumberFormatException();
+					
+					Integer.parseInt(wiek.getText());
+					
+					String data = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
+					ArrayList<String> dane = new ArrayList<String>();
+					dane.add(imie.getText());
+					dane.add(wiek.getText());
+					dane.add(plec.getSelectedItem().toString());
+					dane.add(masc.getText());
+					dane.add(oczy.getText());
+					if(piesstr.equals(gatunek.getSelectedItem().toString())) {
+						String pom = wielkosc.getSelectedItem().toString();
+						int wlk = 0;
+						if(pom.equals("mały")) {
+							wlk=1;
+						} else if (pom.equals("średni")) {
+							wlk=2;
+						} else if (pom.equals("duży")) {
+							wlk=3;
+						}
+						dane.add(Integer.toString(wlk));
+					}
+					dane.add(rasa.getText());
+					dane.add(siersc.getSelectedItem().toString());
+					dane.add(data);
+					dane.add(opis.getText());
+					
+					if (piesstr.equals(gatunek.getSelectedItem().toString())) {
+						Pies pies = new Pies();
+						try {
+							pies.dodBaza(dane);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else {
+						Kot kot = new Kot();
+						try {
+							kot.dodBaza(dane);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					frame.dispose();
+					try {
+						Pies.reloadBaza();
+						Kot.reloadBaza();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String[] args = null;
+					MainWindow.main(args);
 				}
-				String[] args = null;
-				MainWindow.main(args);
+				catch(NumberFormatException e1)
+				{
+					lblError.setVisible(true);
+				}
 			}
 		});
 		btnZatwierd.setBounds(327, 565, 97, 25);
