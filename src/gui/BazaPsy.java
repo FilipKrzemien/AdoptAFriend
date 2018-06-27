@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 public class BazaPsy {
 
@@ -72,6 +74,9 @@ public class BazaPsy {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 582, 441);
 		JScrollPane scrollPane = new JScrollPane(panel_1);
@@ -95,25 +100,6 @@ public class BazaPsy {
 			}
 		});
 		panel_2.add(btnWstecz);
-	
-		JButton btnDodaj = new JButton("DODAJ");
-		if(User.getZaloguj()==1)
-		{
-			btnDodaj.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					frame.dispose();
-					System.out.println("Dodawanko");
-					//String[] args = null;
-					//MainWindow.main(args);
-				}
-			});
-			btnDodaj.setEnabled(true);	
-		}
-		else
-		{
-			btnDodaj.setEnabled(false);
-		}
-		panel_2.add(btnDodaj);
 
 		JButton btnSzukaj = new JButton("SZUKAJ");
 		btnSzukaj.addActionListener(new ActionListener() {

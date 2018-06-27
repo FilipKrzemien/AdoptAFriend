@@ -43,13 +43,13 @@ public class Kot extends Zwierzak {
                 System.out.println("Utworzono nowa baze " + nazwa);
             }
             catch(IOException e){
-                System.out.println("Nie mo¿na utworzyæ bazy " + nazwa);
+                System.out.println("Nie moÂ¿na utworzyÃ¦ bazy " + nazwa);
             }
         }
     }
 	
 	public void dodBaza(ArrayList<String> dane) throws IOException {		
-		kotki.add(new Kot(dane.get(0),Integer.parseInt(dane.get(1)),dane.get(3),dane.get(4),dane.get(5),dane.get(7),dane.get(8),dane.get(9),dane.get(10)));
+		kotki.add(new Kot(dane.get(0),Integer.parseInt(dane.get(1)),dane.get(2),dane.get(3),dane.get(4),dane.get(5),dane.get(6),dane.get(7),dane.get(8)));
 	}
 	
 	public void adoptuj(int i) throws IOException {

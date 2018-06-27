@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,6 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import main.Kot;
 import main.Pies;
 import main.User;
 import main.Zwierzak;
@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 public class Wyniki {
 	
@@ -69,6 +70,9 @@ public class Wyniki {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 582, 441);
 		JScrollPane scrollPane = new JScrollPane(panel_1);
@@ -176,14 +180,14 @@ public class Wyniki {
 			if(name.equals("Kot")) {lblNewLabel_10 = new JLabel("");}
 			else {
 			if(((Pies) sorted.get(i)).getWielkosc()==1) {
-				lblNewLabel_10 = new JLabel("Ma≥y");
+				lblNewLabel_10 = new JLabel("Ma≈Çy");
 				
 			}
 			else if(((Pies) sorted.get(i)).getWielkosc()==2) {
-				lblNewLabel_10 = new JLabel("åredni");				
+				lblNewLabel_10 = new JLabel("≈öredni");				
 			}
 			else if(((Pies) sorted.get(i)).getWielkosc()==3) {
-				lblNewLabel_10 = new JLabel("Duøy");			
+				lblNewLabel_10 = new JLabel("Du≈ºy");			
 			}
 			}
 			lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -200,15 +204,35 @@ public class Wyniki {
 			txtr.setWrapStyleWord(true);
 			txtr.setOpaque(false);
 			int j=i+1;
+			if(User.getZaloguj()==1)
+			{
+				btnAdoptuj = new JButton("USU≈É");
+				btnAdoptuj.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frame.dispose();
+						Pies pies = new Pies();
+						try {
+							pies.adoptuj(j);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String[] args = null;
+						BazaPsy.main(args);
+					}
+				});
+			}
+			else
+			{
 				btnAdoptuj = new JButton("ADOPTUJ");
 				btnAdoptuj.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						frame.dispose();
 						String[] args = null;
-						FormularzAdopt.main(args, j, name);
+						FormularzAdopt.main(args, j, "Pies");
 					}
 				});
-
+			}
 
 
 			JSeparator separator = new JSeparator();
@@ -346,5 +370,3 @@ public class Wyniki {
 		}
 		}
 	}
-
-

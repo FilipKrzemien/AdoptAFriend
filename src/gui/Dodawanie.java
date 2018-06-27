@@ -1,21 +1,30 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 
 import main.Kot;
 import main.Pies;
 
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
@@ -28,6 +37,10 @@ public class Dodawanie {
 	private JTextField oczy;
 	private JTextField rasa;
 	private JTextField wiek;
+	private JTextArea opis;
+	private JLabel lblNewLabel2;
+	private String lastPart;
+	private String piesstr="Pies";
 
 	/**
 	 * Launch the application.
@@ -60,10 +73,12 @@ public class Dodawanie {
 		frame.setBounds(100, 100, 450, 660);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		JLabel lblDodawanie = new JLabel("Dodaj zwierz\u0119 do bazy");
 		lblDodawanie.setBounds(125, 13, 255, 37);
-		lblDodawanie.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDodawanie.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDodawanie.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frame.getContentPane().add(lblDodawanie);
 		
@@ -73,7 +88,7 @@ public class Dodawanie {
 		frame.getContentPane().add(lblGatunek);
 		
 		JComboBox<Object> gatunek = new JComboBox<Object>();
-		gatunek.setModel(new DefaultComboBoxModel<Object>(new String[] {"Kot", "Pies"}));
+		gatunek.setModel(new DefaultComboBoxModel<Object>(new String[] {"Pies", "Kot"}));
 		gatunek.setBounds(125, 60, 95, 25);
 		frame.getContentPane().add(gatunek);
 		
@@ -88,7 +103,7 @@ public class Dodawanie {
 		frame.getContentPane().add(lblPlec);
 		
 		JComboBox<Object> plec = new JComboBox<Object>();
-		plec.setModel(new DefaultComboBoxModel<Object>(new String[] {"Samiec", "Samica"}));
+		plec.setModel(new DefaultComboBoxModel<Object>(new String[] {"samiec", "samica"}));
 		plec.setBounds(125, 165, 95, 25);
 		frame.getContentPane().add(plec);
 		
@@ -147,6 +162,16 @@ public class Dodawanie {
 		lblData.setBounds(12, 376, 104, 16);
 		frame.getContentPane().add(lblData);
 		
+		JLabel lblWiek = new JLabel("Wiek:");
+		lblWiek.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblWiek.setBounds(12, 136, 56, 16);
+		frame.getContentPane().add(lblWiek);
+		
+		wiek = new JTextField();
+		wiek.setColumns(10);
+		wiek.setBounds(125, 132, 255, 25);
+		frame.getContentPane().add(wiek);	
+		
 		JComboBox<Object> dzien = new JComboBox<Object>();
 		dzien.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		dzien.setBounds(126, 372, 41, 25);
@@ -172,34 +197,143 @@ public class Dodawanie {
 		lblZdj.setBounds(12, 528, 104, 16);
 		frame.getContentPane().add(lblZdj);
 		
+		JLabel lblNewLabel = new JLabel("...");
+		lblNewLabel.setForeground(new Color(0, 0, 0));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel.setBounds(255, 529, 169, 16);
+		frame.getContentPane().add(lblNewLabel);
+		
+		opis = new JTextArea();
+		opis.setLineWrap(true);
+		opis.setWrapStyleWord(true);
+		opis.setBounds(125, 410, 255, 101);
+		frame.getContentPane().add(opis);
+		
 		JButton btnDodaj = new JButton("Dodaj zdj\u0119cie");
-		btnDodaj.setBounds(125, 524, 120, 25);
+		btnDodaj.setEnabled(false);
+		btnDodaj.setBounds(125, 525, 120, 25);
 		frame.getContentPane().add(btnDodaj);
+		btnDodaj.setEnabled(false);
+		
+		JButton btnZmien = new JButton("Zmie≈Ñ zdj\u0119cie");	
+		btnZmien.setBounds(125, 525, 120, 25);
+		frame.getContentPane().add(btnZmien);
+		btnZmien.setVisible(false);
+		btnZmien.setEnabled(false);
+		
+		int timerDelay = 40;
+		new javax.swing.Timer(timerDelay , new ActionListener() {	
+			public void actionPerformed(ActionEvent e) 
+			{
+					if(imie.getText().length() == 0 || masc.getText().length() == 0 || oczy.getText().length() == 0 || rasa.getText().length() == 0 
+							|| wiek.getText().length() == 0 || opis.getText().length() == 0)
+					{
+						btnDodaj.setEnabled(false);
+						btnZmien.setEnabled(false);
+					}
+					else
+					{
+						btnDodaj.setEnabled(true);
+						btnZmien.setEnabled(true);
+					}
+			}
+			}).start();
+		
+		
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				int status = chooser.showOpenDialog(null);
+
+				if (status == JFileChooser.APPROVE_OPTION) {
+					File file = chooser.getSelectedFile();
+					if (file == null) {
+						return;
+					}
+				
+					String fileName = chooser.getSelectedFile().getAbsolutePath();
+					lastPart = fileName.substring(fileName.length() - 4);
+					Path sor=Paths.get(chooser.getSelectedFile().getAbsolutePath());
+					Path dest;
+					if(piesstr == gatunek.getSelectedItem())
+						dest=Paths.get("PSY/" + imie.getText() + lastPart);
+					else
+						dest=Paths.get("KOTY/" + imie.getText() + lastPart);	
+					try {
+						Files.copy(sor,dest);
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					btnDodaj.setVisible(false);
+					btnZmien.setVisible(true);
+					lblNewLabel.setVisible(false);
+					lblNewLabel2 = new JLabel(".../" + chooser.getSelectedFile().getName());
+					lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+					lblNewLabel2.setBounds(255, 529, 169, 16);
+					lblNewLabel2.setForeground(Color.RED);
+					frame.getContentPane().add(lblNewLabel2);
+				}
+			}
+		});
+
+		btnZmien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				int status = chooser.showOpenDialog(null);
+				if (status == JFileChooser.APPROVE_OPTION) {
+					File file = chooser.getSelectedFile();
+					if (file == null) {
+						return;
+					}
+					usuwanie(gatunek);
+					String fileName = chooser.getSelectedFile().getAbsolutePath();
+					System.out.println(fileName);
+					lastPart = fileName.substring(fileName.length() - 4);
+					Path sor=Paths.get(chooser.getSelectedFile().getAbsolutePath());
+					Path dest;
+					if(piesstr == gatunek.getSelectedItem())
+						dest=Paths.get("PSY/" + imie.getText() + lastPart);
+					else
+						dest=Paths.get("KOTY/" + imie.getText() + lastPart);					
+					try {
+						Files.copy(sor,dest);
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					lblNewLabel.setVisible(false);
+					lblNewLabel2 = new JLabel(".../" + chooser.getSelectedFile().getName());
+					lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+					lblNewLabel2.setBounds(255, 529, 169, 16);
+					lblNewLabel2.setForeground(Color.RED);
+					frame.getContentPane().add(lblNewLabel2);
+				}
+			}
+		});
+		
+		JButton btnAnuluj = new JButton("Anuluj");
+		btnAnuluj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				usuwanie(gatunek);
+				String[] args = null;
+				MainWindow.main(args);
+			}
+		});
+		btnAnuluj.setBounds(12, 565, 97, 25);
+		frame.getContentPane().add(btnAnuluj);
 		
 		JComboBox<Object> wielkosc = new JComboBox<Object>();
 		wielkosc.setModel(new DefaultComboBoxModel<Object>(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
 		wielkosc.setBounds(125, 267, 95, 25);
 		frame.getContentPane().add(wielkosc);
 		
-		JTextArea opis = new JTextArea();
-		opis.setBounds(125, 410, 255, 101);
-		frame.getContentPane().add(opis);
-		
-		JButton btnAnuluj = new JButton("Anuluj");
-		btnAnuluj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnAnuluj.setBounds(12, 575, 97, 25);
-		frame.getContentPane().add(btnAnuluj);
-		
 		JButton btnZatwierd = new JButton("Dodaj");
 		btnZatwierd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String data = dzien.getSelectedItem().toString() + "/" + miesiac.getSelectedItem().toString() + "/" + rok.getSelectedItem().toString();
-				String piesstr = "Pies";
 				ArrayList<String> dane = new ArrayList<String>();
 				dane.add(imie.getText());
 				dane.add(wiek.getText());
@@ -209,11 +343,11 @@ public class Dodawanie {
 				if(piesstr.equals(gatunek.getSelectedItem().toString())) {
 					String pom = wielkosc.getSelectedItem().toString();
 					int wlk = 0;
-					if(pom.equals("ma≥y")) {
+					if(pom.equals("ma≈Çy")) {
 						wlk=1;
-					} else if (pom.equals("úredni")) {
+					} else if (pom.equals("≈õredni")) {
 						wlk=2;
-					} else if (pom.equals("duøy")) {
+					} else if (pom.equals("du≈ºy")) {
 						wlk=3;
 					}
 					dane.add(Integer.toString(wlk));
@@ -240,26 +374,30 @@ public class Dodawanie {
 						e.printStackTrace();
 					}
 				}
+				frame.dispose();
+				try {
+					Pies.reloadBaza();
+					Kot.reloadBaza();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String[] args = null;
+				MainWindow.main(args);
 			}
 		});
-		btnZatwierd.setBounds(323, 575, 97, 25);
-		frame.getContentPane().add(btnZatwierd);
+		btnZatwierd.setBounds(327, 565, 97, 25);
+		frame.getContentPane().add(btnZatwierd);	
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(256, 528, 56, 16);
-		frame.getContentPane().add(lblNewLabel);
-		
-		
-		JLabel lblWiek = new JLabel("Wiek:");
-		lblWiek.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblWiek.setBounds(12, 136, 56, 16);
-		frame.getContentPane().add(lblWiek);
-		
-		wiek = new JTextField();
-		wiek.setColumns(10);
-		wiek.setBounds(125, 132, 255, 25);
-		frame.getContentPane().add(wiek);
-		
-		
+	}
+	
+	private void usuwanie(JComboBox<Object> gatunek) {
+		String s = null;
+		if(piesstr == gatunek.getSelectedItem())
+			s = "PSY/" + imie.getText() + lastPart;
+		else
+			s = "KOTY/" + imie.getText() + lastPart;
+		File file = new File(s);
+		file.delete();
 	}
 }
