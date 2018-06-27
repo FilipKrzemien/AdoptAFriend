@@ -56,7 +56,7 @@ public class Dodawanie {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 650);
+		frame.setBounds(100, 100, 450, 660);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -73,7 +73,7 @@ public class Dodawanie {
 		
 		JComboBox<Object> gatunek = new JComboBox<Object>();
 		gatunek.setModel(new DefaultComboBoxModel<Object>(new String[] {"Kot", "Pies"}));
-		gatunek.setBounds(125, 63, 67, 19);
+		gatunek.setBounds(125, 60, 95, 25);
 		frame.getContentPane().add(gatunek);
 		
 		JLabel lblImie = new JLabel("Imi\u0119:");
@@ -88,11 +88,11 @@ public class Dodawanie {
 		
 		JComboBox<Object> plec = new JComboBox<Object>();
 		plec.setModel(new DefaultComboBoxModel<Object>(new String[] {"Samiec", "Samica"}));
-		plec.setBounds(125, 168, 67, 19);
+		plec.setBounds(125, 165, 95, 25);
 		frame.getContentPane().add(plec);
 		
 		imie = new JTextField();
-		imie.setBounds(125, 98, 255, 22);
+		imie.setBounds(125, 97, 255, 25);
 		frame.getContentPane().add(imie);
 		imie.setColumns(10);
 		
@@ -113,12 +113,12 @@ public class Dodawanie {
 		
 		masc = new JTextField();
 		masc.setColumns(10);
-		masc.setBounds(125, 200, 255, 22);
+		masc.setBounds(125, 199, 255, 25);
 		frame.getContentPane().add(masc);
 		
 		oczy = new JTextField();
 		oczy.setColumns(10);
-		oczy.setBounds(125, 235, 255, 22);
+		oczy.setBounds(125, 235, 255, 23);
 		frame.getContentPane().add(oczy);
 		
 		JLabel lblRasa = new JLabel("Rasa:");
@@ -133,55 +133,55 @@ public class Dodawanie {
 		
 		JComboBox<Object> siersc = new JComboBox<Object>();
 		siersc.setModel(new DefaultComboBoxModel<Object>(new String[] {"kr\u00F3tka", "\u015Brednia", "d\u0142uga"}));
-		siersc.setBounds(125, 337, 67, 19);
+		siersc.setBounds(125, 334, 95, 25);
 		frame.getContentPane().add(siersc);
 		
 		rasa = new JTextField();
 		rasa.setColumns(10);
-		rasa.setBounds(125, 302, 255, 22);
+		rasa.setBounds(125, 301, 255, 25);
 		frame.getContentPane().add(rasa);
 		
 		JLabel lblData = new JLabel("Data przyj\u0119cia:");
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblData.setBounds(12, 370, 104, 16);
+		lblData.setBounds(12, 376, 104, 16);
 		frame.getContentPane().add(lblData);
 		
 		JComboBox<Object> dzien = new JComboBox<Object>();
 		dzien.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		dzien.setBounds(126, 369, 35, 19);
+		dzien.setBounds(126, 372, 41, 25);
 		frame.getContentPane().add(dzien);
 		
 		JComboBox<Object> miesiac = new JComboBox<Object>();
 		miesiac.setModel(new DefaultComboBoxModel<Object>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
-		miesiac.setBounds(173, 369, 35, 19);
+		miesiac.setBounds(179, 372, 41, 25);
 		frame.getContentPane().add(miesiac);
 		
 		JComboBox<Object> rok = new JComboBox<Object>();
 		rok.setModel(new DefaultComboBoxModel<Object>(new String[] {"2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000"}));
-		rok.setBounds(218, 369, 55, 19);
+		rok.setBounds(232, 372, 55, 25);
 		frame.getContentPane().add(rok);
 		
 		JLabel lblOpis = new JLabel("Opis:");
 		lblOpis.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblOpis.setBounds(12, 401, 104, 16);
+		lblOpis.setBounds(12, 410, 104, 16);
 		frame.getContentPane().add(lblOpis);
 		
 		opis = new JTextField();
 		opis.setColumns(10);
-		opis.setBounds(125, 401, 255, 101);
+		opis.setBounds(125, 410, 255, 101);
 		frame.getContentPane().add(opis);
 		
 		JLabel lblZdj = new JLabel("Zdj\u0119cie:");
 		lblZdj.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblZdj.setBounds(12, 519, 104, 16);
+		lblZdj.setBounds(12, 528, 104, 16);
 		frame.getContentPane().add(lblZdj);
 		
 		JButton btnDodaj = new JButton("Dodaj zdj\u0119cie");
-		btnDodaj.setBounds(125, 515, 120, 25);
+		btnDodaj.setBounds(125, 524, 120, 25);
 		frame.getContentPane().add(btnDodaj);
 		
 		JButton btnAnuluj = new JButton("Anuluj");
-		btnAnuluj.setBounds(12, 565, 97, 25);
+		btnAnuluj.setBounds(12, 575, 97, 25);
 		frame.getContentPane().add(btnAnuluj);
 		
 		JButton btnZatwierd = new JButton("Dodaj");
@@ -190,16 +190,16 @@ public class Dodawanie {
 				
 			}
 		});
-		btnZatwierd.setBounds(323, 565, 97, 25);
+		btnZatwierd.setBounds(323, 575, 97, 25);
 		frame.getContentPane().add(btnZatwierd);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(256, 519, 56, 16);
+		lblNewLabel.setBounds(256, 528, 56, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JComboBox<Object> wielkosc = new JComboBox<Object>();
 		wielkosc.setModel(new DefaultComboBoxModel<Object>(new String[] {"ma\u0142y", "\u015Bredni", "du\u017Cy"}));
-		wielkosc.setBounds(125, 270, 67, 19);
+		wielkosc.setBounds(125, 267, 95, 25);
 		frame.getContentPane().add(wielkosc);
 		
 		JLabel lblWiek = new JLabel("Wiek:");
@@ -209,7 +209,7 @@ public class Dodawanie {
 		
 		wiek = new JTextField();
 		wiek.setColumns(10);
-		wiek.setBounds(125, 133, 255, 22);
+		wiek.setBounds(125, 132, 255, 25);
 		frame.getContentPane().add(wiek);
 	}
 }
