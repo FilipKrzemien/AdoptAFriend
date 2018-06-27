@@ -11,8 +11,11 @@ import javax.swing.SwingConstants;
 import main.User;
 
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class MainWindow {
 
@@ -49,6 +52,8 @@ public class MainWindow {
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBounds(70, 170, 200, 150);
@@ -88,6 +93,25 @@ public class MainWindow {
 		wyloguj.setBounds(250, 11, 324, 51);
 		frame.getContentPane().add(wyloguj);
 		
+		JButton btnDodaj = new JButton("DODAJ");
+		btnDodaj.setBounds(20, 11, 89, 23);
+		if(User.getZaloguj()==1)
+		{
+			btnDodaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					String[] args = null;
+					Dodawanie.main(args);
+				}
+			});
+			btnDodaj.setVisible(true);	
+		}
+		else
+		{
+			btnDodaj.setVisible(false);
+		}
+		frame.getContentPane().add(btnDodaj);
+		
 		JButton btnWyloguj = new JButton("WYLOGUJ");
 		btnWyloguj.setBounds(214, 0, 100, 23);
 		wyloguj.add(btnWyloguj);
@@ -95,6 +119,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				loguj.setVisible(true);
 				wyloguj.setVisible(false);
+				btnDodaj.setVisible(false);
 				User.setZaloguj(0);
 			}
 		});
@@ -111,6 +136,7 @@ public class MainWindow {
 		lblZalJako.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		lblZalJako.setBounds(35, 0, 97, 23);
 		wyloguj.add(lblZalJako);
+		
 		btnZaloguj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();

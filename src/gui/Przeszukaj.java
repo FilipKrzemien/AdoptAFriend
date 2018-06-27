@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.BoxLayout;
@@ -8,12 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 
 import main.Wyszukiwanie;
+import main.Zwierzak;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
@@ -62,6 +64,8 @@ public class Przeszukaj {
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
@@ -100,10 +104,13 @@ public class Przeszukaj {
 		btnFiltruj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				preFilter(cechy, kolor, kolorOczu, siersc, rasa);
-				Integer[] counter = properFilter(cechy);
-				Arrays.sort(counter,Collections.reverseOrder());
-				//for(int i=0;i<counter.length;i++) {System.out.println(counter[i]);}
+				Integer[] counter = getCounter(cechy);
+				ArrayList<Zwierzak> sorted = Wyszukiwanie.properFilter(name, counter);
+				frame.dispose();
+				Wyniki.main(name,sorted);
 			}
+
+			
 		});
 		
 		JButton btnWstecz = new JButton("Wstecz");
@@ -203,7 +210,7 @@ public class Przeszukaj {
 		siersci=Wyszukiwanie.usun_duplikaty(cechy,2);
 		rasy=Wyszukiwanie.usun_duplikaty(cechy,3);
 	}
-	private Integer[] properFilter(String[][] cechy) {
+	private Integer[] getCounter(String[][] cechy) {
 		Integer[] counter = new Integer[cechy.length];
 		for(int i=0;i<cechy.length;i++) 
 		{	
@@ -215,19 +222,18 @@ public class Przeszukaj {
 					counter[i]+=1;
 				}
 			}
-			
 		}
 		return counter;
 	}
 
 	private void preFilter(String[][] cechy, JComboBox<Object> kolor, JComboBox<Object> kolorOczu,
-			JComboBox<Object> siersc, JComboBox<Object> rasa) {
+			JComboBox<Object> siersc, JComboBox<Object> rasa) 
+	{
 		filtry[0]=(String)kolor.getSelectedItem();
 		filtry[1]=(String)kolorOczu.getSelectedItem();
 		filtry[2]=(String)siersc.getSelectedItem();
-		filtry[3]=(String)rasa.getSelectedItem();
-		
-		
+		filtry[3]=(String)rasa.getSelectedItem();	
 	}
+	
 	
 }

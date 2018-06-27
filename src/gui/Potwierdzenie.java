@@ -6,12 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
@@ -50,6 +53,8 @@ public class Potwierdzenie {
 		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 584, 441);

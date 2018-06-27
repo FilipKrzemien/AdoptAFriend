@@ -64,7 +64,7 @@ public abstract class Zwierzak {
 	
 	public void setOpis(String opis) { this.opis=opis; }
 	
-	public abstract void dodBaza() throws IOException;
+	public abstract void dodBaza(ArrayList<String> dane) throws IOException;
 	
 	public static void adoptuj(ArrayList<Zwierzak> list, String name, int i) throws IOException {
 		String s;

@@ -18,8 +18,11 @@ import main.User;
 
 import javax.swing.JPasswordField;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class Logowanie {
 
@@ -61,6 +64,8 @@ public class Logowanie {
 		frame.setBounds(100, 100, 300, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);

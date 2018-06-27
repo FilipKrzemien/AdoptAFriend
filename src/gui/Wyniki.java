@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -25,6 +26,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import main.Pies;
 import main.User;
+import main.Zwierzak;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -36,20 +38,20 @@ import javax.swing.SwingUtilities;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class BazaPsy {
-
+public class Wyniki {
+	
+	
 	private JFrame frame;
 	private JLabel lblNewLabel_10;
-	private static String[][] cechy = new String[Pies.pieski.size()][4];
 	JButton btnAdoptuj;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String name, ArrayList<Zwierzak> sorted) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BazaPsy window = new BazaPsy();
+					Wyniki window = new Wyniki(name, sorted);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,17 +60,11 @@ public class BazaPsy {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public BazaPsy() {
-		initialize();
+	public Wyniki(String name, ArrayList<Zwierzak> sorted) {
+		initialize(name,sorted);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	private void initialize(String name, ArrayList<Zwierzak> sorted) {
 		
 		
 		frame = new JFrame();
@@ -100,17 +96,25 @@ public class BazaPsy {
 			}
 		});
 		panel_2.add(btnWstecz);
-
-		JButton btnSzukaj = new JButton("SZUKAJ");
-		btnSzukaj.addActionListener(new ActionListener() {
+		
+		JButton btnSzukajPonownie = new JButton("SZUKAJ PONOWNIE");
+		btnSzukajPonownie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				String[] args = null;
-				Przeszukaj.main(args, "Pies",getCechy());
+				if(name.equals("Kot")) {
+					Przeszukaj.main(args, name,BazaKoty.getCechy());
+				}
+				else {
+					Przeszukaj.main(args, name,BazaPsy.getCechy());
+				}
+				
 			}
-		});
-		panel_2.add(btnSzukaj);	
 		
+		}
+		);
+		panel_2.add(btnSzukajPonownie);
+
 		JButton btnWyjd = new JButton(" WYJD\u0179 ");
 		btnWyjd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -119,16 +123,24 @@ public class BazaPsy {
 		});
 		panel_2.add(btnWyjd);
 		
-		JLabel lblNewLabel_9 = new JLabel("PSY");
+		
+		JLabel lblNewLabel_9 = new JLabel("Wyniki Wyszukiwania ");
 		lblNewLabel_9.setAlignmentX(Component.CENTER_ALIGNMENT);
 		frame.getContentPane().add(lblNewLabel_9);
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 20));
-		for(int i=0;i<Pies.pieski.size();i++)
+		
+		for(int i=0;i<sorted.size();i++)
 		{		
+			String s;
 			JPanel panel = new JPanel();
 			JLabel lblNewLabel = new JLabel("");
-			String s = "PSY/" + Pies.pieski.get(i).getImie() + "_pies.jpg";
+			if(name.equals("Kot")) {
+				s = "KOTY/" + sorted.get(i).getImie() + "_kot.jpg";
+			}
+			else {
+			s = "PSY/" + sorted.get(i).getImie() + "_pies.jpg";
+			}
 			lblNewLabel.setIcon(new ImageIcon(s));
 			JLabel lblImi = new JLabel("Imi\u0119:");
 			lblImi.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -157,35 +169,37 @@ public class BazaPsy {
 			JLabel lblOpis = new JLabel("Opis:");
 			lblOpis.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-			JLabel lblNewLabel_1 = new JLabel(Pies.pieski.get(i).getImie());
+			JLabel lblNewLabel_1 = new JLabel(sorted.get(i).getImie());
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_2 = new JLabel(Integer.toString(Pies.pieski.get(i).getWiek()));
+			JLabel lblNewLabel_2 = new JLabel(Integer.toString(sorted.get(i).getWiek()));
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_3 = new JLabel(Pies.pieski.get(i).getKolor());
+			JLabel lblNewLabel_3 = new JLabel(sorted.get(i).getKolor());
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_4 = new JLabel(Pies.pieski.get(i).getKolorOczu());
+			JLabel lblNewLabel_4 = new JLabel(sorted.get(i).getKolorOczu());
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			if(((Pies) Pies.pieski.get(i)).getWielkosc()==1) {
+			if(name.equals("Kot")) {lblNewLabel_10 = new JLabel("");}
+			else {
+			if(((Pies) sorted.get(i)).getWielkosc()==1) {
 				lblNewLabel_10 = new JLabel("Ma³y");
+				
 			}
-			else if(((Pies) Pies.pieski.get(i)).getWielkosc()==2) {
+			else if(((Pies) sorted.get(i)).getWielkosc()==2) {
 				lblNewLabel_10 = new JLabel("Œredni");				
 			}
-			else if(((Pies) Pies.pieski.get(i)).getWielkosc()==3) {
-				lblNewLabel_10 = new JLabel("Du¿y");				
+			else if(((Pies) sorted.get(i)).getWielkosc()==3) {
+				lblNewLabel_10 = new JLabel("Du¿y");			
 			}
-			//lblNewLabel_10 = new JLabel(Integer.toString(((Pies) Pies.pieski.get(i)).getWielkosc()));
+			}
 			lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_6 = new JLabel(Pies.pieski.get(i).getRasa());
+			JLabel lblNewLabel_6 = new JLabel(sorted.get(i).getRasa());
 			lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_7 = new JLabel(Pies.pieski.get(i).getSiersc());
+			JLabel lblNewLabel_7 = new JLabel(sorted.get(i).getSiersc());
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			JLabel lblNewLabel_8 = new JLabel(Pies.pieski.get(i).getDataZnalezienia());
+			JLabel lblNewLabel_8 = new JLabel(sorted.get(i).getDataZnalezienia());
 			lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			setCechy(cechy, i);
 			JTextArea txtr = new JTextArea();
 			txtr.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			txtr.setText(Pies.pieski.get(i).getOpis());
+			txtr.setText(sorted.get(i).getOpis());
 			txtr.setLineWrap(true);
 			txtr.setWrapStyleWord(true);
 			txtr.setOpaque(false);
@@ -221,14 +235,13 @@ public class BazaPsy {
 			}
 
 
-
 			JSeparator separator = new JSeparator();
 		
 			JLabel lblNewLabel_11 = new JLabel("");
 			File imageMale = new File("GUI/male.png");
 			File imageFemale = new File("GUI/female.png");
 			String plec = "samiec";
-			if(plec.equals(Pies.pieski.get(i).getPlec()))
+			if(plec.equals(sorted.get(i).getPlec()))
 			{
 				try {
 					BufferedImage imagemale = ImageIO.read(imageMale);
@@ -355,15 +368,7 @@ public class BazaPsy {
 		    }
 		});
 		}
+		}
 	}
 
-	private void setCechy(String[][] cechy, int i) {
-		cechy[i][0]=Pies.pieski.get(i).getKolor();
-		cechy[i][1]=Pies.pieski.get(i).getKolorOczu();
-		cechy[i][2]=Pies.pieski.get(i).getRasa();
-		cechy[i][3]=Pies.pieski.get(i).getSiersc();
-	}
-	public static String[][] getCechy(){
-		return cechy;
-	}
-}
+
