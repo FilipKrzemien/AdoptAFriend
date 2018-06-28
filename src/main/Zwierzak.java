@@ -90,13 +90,13 @@ public abstract class Zwierzak {
 		if(name.equals(Pies.class.getSimpleName()))
 		{
 			if(((Pies) list.get(i)).getWielkosc()==1) {
-				System.out.print("Ma≥y\t\t");
+				System.out.print("Ma≈Çy\t\t");
 			}
 			else if(((Pies) list.get(i)).getWielkosc()==2) {
-				System.out.print("åredni\t\t");				
+				System.out.print("≈öredni\t\t");				
 			}
 			else if(((Pies) list.get(i)).getWielkosc()==3) {
-				System.out.print("Duøy\t\t");				
+				System.out.print("Du≈ºy\t\t");				
 			}
 		}
 			System.out.print(list.get(i).getRasa() + "\t\t" + list.get(i).getSiersc() + "\t\t" + 

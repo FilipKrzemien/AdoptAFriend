@@ -49,7 +49,7 @@ public class Pies extends Zwierzak {
                 System.out.println("Utworzono nowa baze " + nazwa);
             }
             catch(IOException e){
-                System.out.println("Nie mo¿na utworzyæ bazy " + nazwa);
+                System.out.println("Nie moÅ¼na utworzyÄ‡ bazy " + nazwa);
             }
         }
     }
