@@ -93,11 +93,11 @@ public class User {
                 FileWriter fw = new FileWriter(nazwa);
                 BufferedWriter bw = new BufferedWriter(fw);
         	    bw.write("admin\tadmin");
-                System.out.println("Utworzono nowa baze uøytkownikÛw" + nazwa);
+                System.out.println("Utworzono nowa baze u≈ºytkownik√≥w" + nazwa);
                 bw.close();
             }
             catch(IOException e){
-                System.out.println("Nie moøna utworzyÊ bazy uøytkownikÛw" + nazwa);
+                System.out.println("Nie mo≈ºna utworzyƒá bazy u≈ºytkownik√≥w" + nazwa);
             }
         }
     }

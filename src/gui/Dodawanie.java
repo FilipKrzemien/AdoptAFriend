@@ -216,7 +216,7 @@ public class Dodawanie {
 		frame.getContentPane().add(btnDodaj);
 		btnDodaj.setEnabled(false);
 		
-		JButton btnZmien = new JButton("ZmieÒ zdj\u0119cie");	
+		JButton btnZmien = new JButton("Zmie≈Ñ zdj\u0119cie");	
 		btnZmien.setBounds(125, 525, 120, 25);
 		frame.getContentPane().add(btnZmien);
 		btnZmien.setVisible(false);
@@ -363,11 +363,11 @@ public class Dodawanie {
 					if(piesstr.equals(gatunek.getSelectedItem().toString())) {
 						String pom = wielkosc.getSelectedItem().toString();
 						int wlk = 0;
-						if(pom.equals("ma≥y")) {
+						if(pom.equals("ma≈Çy")) {
 							wlk=1;
-						} else if (pom.equals("úredni")) {
+						} else if (pom.equals("≈õredni")) {
 							wlk=2;
-						} else if (pom.equals("duøy")) {
+						} else if (pom.equals("du≈ºy")) {
 							wlk=3;
 						}
 						dane.add(Integer.toString(wlk));
