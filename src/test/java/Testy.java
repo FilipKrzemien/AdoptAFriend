@@ -1,4 +1,4 @@
-package testy;
+package test.java;
 
 import main.Kot;
 import static org.junit.jupiter.api.Assertions.*;

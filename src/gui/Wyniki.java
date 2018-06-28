@@ -180,14 +180,14 @@ public class Wyniki {
 			if(name.equals("Kot")) {lblNewLabel_10 = new JLabel("");}
 			else {
 			if(((Pies) sorted.get(i)).getWielkosc()==1) {
-				lblNewLabel_10 = new JLabel("Ma≈Çy");
+				lblNewLabel_10 = new JLabel("Ma≥y");
 				
 			}
 			else if(((Pies) sorted.get(i)).getWielkosc()==2) {
-				lblNewLabel_10 = new JLabel("≈öredni");				
+				lblNewLabel_10 = new JLabel("åredni");				
 			}
 			else if(((Pies) sorted.get(i)).getWielkosc()==3) {
-				lblNewLabel_10 = new JLabel("Du≈ºy");			
+				lblNewLabel_10 = new JLabel("Duøy");			
 			}
 			}
 			lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -206,7 +206,7 @@ public class Wyniki {
 			int j=i+1;
 			if(User.getZaloguj()==1)
 			{
-				btnAdoptuj = new JButton("USU≈É");
+				btnAdoptuj = new JButton("USU—");
 				btnAdoptuj.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						frame.dispose();
@@ -370,3 +370,5 @@ public class Wyniki {
 		}
 		}
 	}
+
+
