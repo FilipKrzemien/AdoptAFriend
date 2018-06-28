@@ -50,15 +50,15 @@ public class Kandydat {
 	public static void zapis(String spec, int k, Kandydat kandydat) throws IOException {
         FileWriter fw = new FileWriter("Potwierdzenie_" + kandydat.getNazwisko() + "_" + kandydat.getImie() + ".txt");
         BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("------------ SCHRONISKO DLA ZWIERZ•T W KRAKOWIE ------------");
+		bw.write("------------ SCHRONISKO DLA ZWIERZƒÑT W KRAKOWIE ------------");
 		bw.newLine();
-		bw.write("------------ POTWIERDZENIE WYS£ANIA FORMULARZA -------------");
+		bw.write("------------ POTWIERDZENIE WYS≈ÅANIA FORMULARZA -------------");
 		bw.newLine();
 		bw.newLine();
 		bw.write("~ Wybrany " + spec + " ~");
 		bw.newLine();
 		bw.newLine();
-		bw.write("ImiÍ: " + Kot.kotki.get(k).getImie());
+		bw.write("Imiƒô: " + Kot.kotki.get(k).getImie());
 		bw.newLine();
 		bw.write("Wiek: " + Integer.toString(Kot.kotki.get(k).getWiek()));
 		bw.newLine();
@@ -69,7 +69,7 @@ public class Kandydat {
 		bw.write("Dane osobowe:");
 		bw.newLine();
 		bw.newLine();
-		bw.write("ImiÍ: " + kandydat.getImie());
+		bw.write("Imiƒô: " + kandydat.getImie());
 		bw.newLine();
 		bw.write("Nazwisko: " + kandydat.getNazwisko());
 		bw.newLine();
@@ -83,7 +83,7 @@ public class Kandydat {
 		bw.newLine();
 		bw.newLine();
 		bw.newLine();
-		bw.write("------------ SCHRONISKO DLA ZWIERZ•T W KRAKOWIE ------------");
+		bw.write("------------ SCHRONISKO DLA ZWIERZƒÑT W KRAKOWIE ------------");
 		bw.close();
 		fw.close();
 	}
